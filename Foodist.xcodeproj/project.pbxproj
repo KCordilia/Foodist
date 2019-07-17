@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -54,8 +54,15 @@
 				D497CD94AF089452ED54E24D /* Pods-Foodist.debug.xcconfig */,
 				A4B18ADFFF82DA92EF166E4C /* Pods-Foodist.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8A18AA3A22DF5B3C004F2311 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8A64804622DF46CE001B3A45 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8A64803322DF46CC001B3A45 = {
@@ -79,11 +86,11 @@
 		8A64803E22DF46CC001B3A45 /* Foodist */ = {
 			isa = PBXGroup;
 			children = (
+				8A18AA3A22DF5B3C004F2311 /* Resources */,
 				8A900CA122DF4BFD0093A60E /* Models */,
 				8A900CA022DF4ACF0093A60E /* Views */,
 				8A900C9F22DF4AB40093A60E /* Supporting */,
 				8A900C9E22DF4A9E0093A60E /* ViewControllers */,
-				8A64804622DF46CE001B3A45 /* Assets.xcassets */,
 				8A64804B22DF46CE001B3A45 /* Info.plist */,
 			);
 			path = Foodist;
