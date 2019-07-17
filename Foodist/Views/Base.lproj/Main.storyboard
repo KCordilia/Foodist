@@ -22,7 +22,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="EuY-Rx-pfj"/>
                     <connections>
-                        <segue destination="Kah-ky-xHE" kind="show" id="Mlg-bh-0nR"/>
+                        <segue destination="Kah-ky-xHE" kind="show" identifier="showDetail" id="Mlg-bh-0nR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
