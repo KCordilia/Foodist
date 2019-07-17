@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83C8F01503BD6898D7308EC0 /* Pods_Foodist.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987662C9FE59CB1D30AF0933 /* Pods_Foodist.framework */; };
 		8A64804022DF46CC001B3A45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A64803F22DF46CC001B3A45 /* AppDelegate.swift */; };
 		8A64804222DF46CC001B3A45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A64804122DF46CC001B3A45 /* ViewController.swift */; };
 		8A64804522DF46CC001B3A45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A64804322DF46CC001B3A45 /* Main.storyboard */; };
@@ -22,6 +23,9 @@
 		8A64804622DF46CE001B3A45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A64804922DF46CE001B3A45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8A64804B22DF46CE001B3A45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		987662C9FE59CB1D30AF0933 /* Pods_Foodist.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foodist.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4B18ADFFF82DA92EF166E4C /* Pods-Foodist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodist.release.xcconfig"; path = "Target Support Files/Pods-Foodist/Pods-Foodist.release.xcconfig"; sourceTree = "<group>"; };
+		D497CD94AF089452ED54E24D /* Pods-Foodist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodist.debug.xcconfig"; path = "Target Support Files/Pods-Foodist/Pods-Foodist.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83C8F01503BD6898D7308EC0 /* Pods_Foodist.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14AA9B29248FB7A6738D8DE8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				987662C9FE59CB1D30AF0933 /* Pods_Foodist.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5E3B22B3EB5D78828CB3D749 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D497CD94AF089452ED54E24D /* Pods-Foodist.debug.xcconfig */,
+				A4B18ADFFF82DA92EF166E4C /* Pods-Foodist.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8A64803322DF46CC001B3A45 = {
 			isa = PBXGroup;
 			children = (
 				8A64803E22DF46CC001B3A45 /* Foodist */,
 				8A64803D22DF46CC001B3A45 /* Products */,
+				5E3B22B3EB5D78828CB3D749 /* Pods */,
+				14AA9B29248FB7A6738D8DE8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +79,7 @@
 		8A64803E22DF46CC001B3A45 /* Foodist */ = {
 			isa = PBXGroup;
 			children = (
+				8A900CA122DF4BFD0093A60E /* Models */,
 				8A900CA022DF4ACF0093A60E /* Views */,
 				8A900C9F22DF4AB40093A60E /* Supporting */,
 				8A900C9E22DF4A9E0093A60E /* ViewControllers */,
@@ -88,6 +114,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		8A900CA122DF4BFD0093A60E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -95,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8A64804E22DF46CE001B3A45 /* Build configuration list for PBXNativeTarget "Foodist" */;
 			buildPhases = (
+				97D63081AE81516D3A08517A /* [CP] Check Pods Manifest.lock */,
 				8A64803822DF46CC001B3A45 /* Sources */,
 				8A64803922DF46CC001B3A45 /* Frameworks */,
 				8A64803A22DF46CC001B3A45 /* Resources */,
+				F73AF626A01DACBC138844D2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -153,6 +188,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		97D63081AE81516D3A08517A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Foodist-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F73AF626A01DACBC138844D2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Foodist/Pods-Foodist-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Foodist/Pods-Foodist-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Foodist/Pods-Foodist-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8A64803822DF46CC001B3A45 /* Sources */ = {
@@ -304,6 +381,7 @@
 		};
 		8A64804F22DF46CE001B3A45 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D497CD94AF089452ED54E24D /* Pods-Foodist.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -322,6 +400,7 @@
 		};
 		8A64805022DF46CE001B3A45 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4B18ADFFF82DA92EF166E4C /* Pods-Foodist.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
