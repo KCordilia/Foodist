@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		06424A0E22DF5C2100DD93A9 /* RecipeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06424A0C22DF5C2100DD93A9 /* RecipeDetail.storyboard */; };
+		06424A1022DF694600DD93A9 /* AllCatagoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A0F22DF694600DD93A9 /* AllCatagoriesViewController.swift */; };
+		06424A1222DF6D6D00DD93A9 /* SelectedCatagoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A1122DF6D6D00DD93A9 /* SelectedCatagoryViewController.swift */; };
+		06424A1522DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A1422DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift */; };
+		06424A1722DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A1622DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift */; };
+		06424A1922DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A1822DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift */; };
 		8A64804022DF46CC001B3A45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A64803F22DF46CC001B3A45 /* AppDelegate.swift */; };
 		8A64804222DF46CC001B3A45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A64804122DF46CC001B3A45 /* ViewController.swift */; };
 		8A64804522DF46CC001B3A45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A64804322DF46CC001B3A45 /* Main.storyboard */; };
@@ -17,6 +22,11 @@
 
 /* Begin PBXFileReference section */
 		06424A0D22DF5C2100DD93A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Foodist/Views/Base.lproj/RecipeDetail.storyboard; sourceTree = "<group>"; };
+		06424A0F22DF694600DD93A9 /* AllCatagoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCatagoriesViewController.swift; sourceTree = "<group>"; };
+		06424A1122DF6D6D00DD93A9 /* SelectedCatagoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCatagoryViewController.swift; sourceTree = "<group>"; };
+		06424A1422DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCatagoriesTableViewCell.swift; sourceTree = "<group>"; };
+		06424A1622DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCatagoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		06424A1822DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCatagoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		8A64803C22DF46CC001B3A45 /* Foodist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A64803F22DF46CC001B3A45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A64804122DF46CC001B3A45 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +47,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06424A1322DF6EEE00DD93A9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				06424A1422DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift */,
+				06424A1622DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift */,
+				06424A1822DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		8A64803322DF46CC001B3A45 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +76,7 @@
 		8A64803E22DF46CC001B3A45 /* Foodist */ = {
 			isa = PBXGroup;
 			children = (
+				06424A1322DF6EEE00DD93A9 /* Cells */,
 				8A900CA022DF4ACF0093A60E /* Views */,
 				8A900C9F22DF4AB40093A60E /* Supporting */,
 				8A900C9E22DF4A9E0093A60E /* ViewControllers */,
@@ -69,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				8A64804122DF46CC001B3A45 /* ViewController.swift */,
+				06424A0F22DF694600DD93A9 /* AllCatagoriesViewController.swift */,
+				06424A1122DF6D6D00DD93A9 /* SelectedCatagoryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -164,6 +187,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A64804222DF46CC001B3A45 /* ViewController.swift in Sources */,
+				06424A1522DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift in Sources */,
+				06424A1222DF6D6D00DD93A9 /* SelectedCatagoryViewController.swift in Sources */,
+				06424A1022DF694600DD93A9 /* AllCatagoriesViewController.swift in Sources */,
+				06424A1722DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift in Sources */,
+				06424A1922DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift in Sources */,
 				8A64804022DF46CC001B3A45 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
