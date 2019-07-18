@@ -117,7 +117,7 @@
         <!--RecipeDetail-->
         <scene sceneID="20v-Yd-HKc">
             <objects>
-                <viewControllerPlaceholder storyboardName="RecipeDetail" id="Kah-ky-xHE" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="RecipeDetail" storyboardName="RecipeDetail" id="Kah-ky-xHE" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DB0-MF-3ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2081" y="-553"/>
