@@ -18,11 +18,23 @@ class RecipeDetailViewController: UIViewController {
     let recipeId = 324694
     var ingredientList: [SingleIngredient] = []
     var instructionList: [RecipeStep] = []
+    var recipe: Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       let url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/information"
+        let networkHandler = NetworkHandler()
+        networkHandler.getAPIData(url, result: recipe) { (result) in
+            self.recipe = result as? Recipe
+            DispatchQueue.main.async {
+                if let recipe = self.recipe {
+                self.loadRecipe(recipe)
+                }
+            }
+        }
         
-        RecipeServerNetworking.loadRecipeData(id: recipeId) { recipe in
+
+       /* RecipeServerNetworking.loadRecipeData(id: recipeId) { recipe in
             guard
                 let recipeName = recipe?.title,
                 let recipeImageUrl = recipe?.image,
@@ -35,7 +47,7 @@ class RecipeDetailViewController: UIViewController {
                 self.cookingTimeLabel.text = "\(cookingTime)"
             }
         }
-        
+        */
         IngredientServerNetworking.loadIngredientData(id: recipeId) { ingredients in
             guard
                 let ingredients = ingredients
@@ -55,6 +67,15 @@ class RecipeDetailViewController: UIViewController {
                 }
             }
         }
+    }
+    func loadRecipe(_ recipe: Recipe) {
+         self.recipeTitle.text = recipe.title
+        let recipeImageUrl = recipe.image
+        let cookingTime = recipe.readyInMinutes
+        if let url = URL(string: recipeImageUrl) {
+        recipeImage.kf.setImage(with: url)
+        }
+        cookingTimeLabel.text = "\(cookingTime)"
     }
 }
 

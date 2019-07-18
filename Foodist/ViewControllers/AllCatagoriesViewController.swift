@@ -15,13 +15,22 @@ class AllCatagoriesViewController: UIViewController {
     
     //MARK:- Properties
     let cellIdentifier = "allCatagoryCell"
-    
+    var catagories: Category?
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.separatorStyle = .none
-        // Do any additional setup after loading the view.
-    }
+        
+        //load catagory. find catagories and attach it to Url and pass the url to networking function. for now default catagory is main+course.
+        let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=main+course"
+        var recipeList: RecipeList?
+        let networkHandler = NetworkHandler()
+        networkHandler.getAPIData(urlString, result: recipeList) { (result) in
+            recipeList = result as! RecipeList
+            print(recipeList)
+        }
+        }
+    
     
 
     /*

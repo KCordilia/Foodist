@@ -25,11 +25,11 @@ struct CategoryServerNetworking {
         task.resume()
     }
     
-    static func loadCategoryData(completion: @escaping ([Recipe]) -> Void) {
+    static func loadCategoryData(completion: @escaping ([RecipeList]) -> Void) {
         getAPIData { resultData in
             do {
                 let decoder = JSONDecoder()
-                let decodedResult = try decoder.decode([Recipe].self, from: resultData)
+                let decodedResult = try decoder.decode([RecipeList].self, from: resultData)
                 completion(decodedResult)
             } catch let error{
                 print(error)

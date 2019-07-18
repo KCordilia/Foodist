@@ -11,11 +11,7 @@ import UIKit
 class SelectedCatagoryViewController: UIViewController {
     
     //MARK:- Outlets
- /*   @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var pageControl: UIPageControl!
-    
-    //MARK:- Properties
-    let cellIdentifier = "selectedCatagoryCell"*/
+ 
     var index = 0
     
     @IBOutlet weak var sampleLabel: UILabel!
@@ -45,16 +41,3 @@ class SelectedCatagoryViewController: UIViewController {
 
 }
 
-/*extension SelectedCatagoryViewController: UICollectionViewDataSource,UISearchControllerDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? SelectedCatagoryCollectionViewCell
-            else { preconditionFailure("deque cell failed in selected catagory collection view ") }
-        return cell
-    }
-    
-    
-}*/
