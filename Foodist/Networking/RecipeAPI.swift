@@ -25,15 +25,15 @@ struct RecipeServerNetworking {
         task.resume()
     }
     
-    static func loadRecipeData(id: Int, completion: @escaping ([Recipe]) -> Void) {
+    static func loadRecipeData(id: Int, completion: @escaping (Recipe?) -> Void) {
         getAPIData(id: id) { resultData in
             do {
                 let decoder = JSONDecoder()
-                let decodedResult = try decoder.decode([Recipe].self, from: resultData)
+                let decodedResult = try decoder.decode(Recipe.self, from: resultData)
                 completion(decodedResult)
             } catch let error{
                 print(error)
-                completion([])
+                completion(nil)
             }
         }
     }

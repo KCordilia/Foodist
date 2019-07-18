@@ -13,6 +13,5 @@ struct Recipe: Codable {
     let title: String
     let readyInMinutes: Int
     let servings: Int
-    let image: [String]
-    let instructions: [RecipeInstructions]
+    let image: String
 }

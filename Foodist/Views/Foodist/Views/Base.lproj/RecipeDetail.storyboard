@@ -10,20 +10,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Recipe Detail View Controller-->
         <scene sceneID="pwB-b6-7lR">
             <objects>
-                <viewController id="Gkd-h2-xCY" sceneMemberID="viewController">
+                <viewController id="Gkd-h2-xCY" customClass="RecipeDetailViewController" customModule="Foodist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sTZ-bd-cD3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eja-z2-e47">
+                                <rect key="frame" x="0.0" y="44" width="414" height="191"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="191" id="9Ja-4q-zxN"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhF-7q-VAI">
+                                <rect key="frame" x="20" y="243" width="374" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="GzP-UN-mAp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eja-z2-e47" firstAttribute="top" secondItem="K6G-AG-5xS" secondAttribute="top" id="NBV-UX-yP6"/>
+                            <constraint firstItem="eja-z2-e47" firstAttribute="leading" secondItem="K6G-AG-5xS" secondAttribute="leading" id="Rba-1X-F9d"/>
+                            <constraint firstItem="dhF-7q-VAI" firstAttribute="top" secondItem="eja-z2-e47" secondAttribute="bottom" constant="8" id="VsR-Pj-IPx"/>
+                            <constraint firstItem="dhF-7q-VAI" firstAttribute="leading" secondItem="K6G-AG-5xS" secondAttribute="leading" constant="20" id="cxq-5g-p00"/>
+                            <constraint firstItem="K6G-AG-5xS" firstAttribute="trailing" secondItem="dhF-7q-VAI" secondAttribute="trailing" constant="20" id="n9n-z2-6FC"/>
+                            <constraint firstItem="eja-z2-e47" firstAttribute="trailing" secondItem="K6G-AG-5xS" secondAttribute="trailing" id="yn8-s3-jiM"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="K6G-AG-5xS"/>
                     </view>
+                    <connections>
+                        <outlet property="recipeImage" destination="eja-z2-e47" id="aOz-mT-pEC"/>
+                        <outlet property="recipeTitle" destination="dhF-7q-VAI" id="wpn-4U-cXa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dgj-10-AHD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2081" y="-553"/>
+            <point key="canvasLocation" x="2079.7101449275365" y="-553.125"/>
         </scene>
     </scenes>
 </document>
