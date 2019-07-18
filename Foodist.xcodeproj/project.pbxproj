@@ -131,7 +131,7 @@
 		8A64803E22DF46CC001B3A45 /* Foodist */ = {
 			isa = PBXGroup;
 			children = (
-				8AE7BBDC22E07A5400AD88BF /* New Group */,
+				8AE7BBDC22E07A5400AD88BF /* Cells */,
 				8A36179922DF652B0050790D /* Networking */,
 				8A36179822DF65040050790D /* Playground */,
 				8A36179222DF5FD50050790D /* Models */,
@@ -171,12 +171,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8AE7BBDC22E07A5400AD88BF /* New Group */ = {
+		8AE7BBDC22E07A5400AD88BF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				8AE7BBDD22E07A6E00AD88BF /* IngredientCell.swift */,
 			);
-			path = "New Group";
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

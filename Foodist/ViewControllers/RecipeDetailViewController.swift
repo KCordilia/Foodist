@@ -56,8 +56,6 @@ class RecipeDetailViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 extension RecipeDetailViewController: UITableViewDataSource {
