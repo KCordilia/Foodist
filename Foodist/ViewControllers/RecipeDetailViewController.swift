@@ -15,7 +15,7 @@ class RecipeDetailViewController: UIViewController {
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cookingTimeLabel: UILabel!
-    let recipeId = 324694
+    let recipeId = 532952
     var ingredientList: [SingleIngredient] = []
     var instructionList: [RecipeStep] = []
     
@@ -52,7 +52,9 @@ class RecipeDetailViewController: UIViewController {
             instructions.forEach { instruction in
                 instruction.steps.forEach { step in
                     self.instructionList.append(step)
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
