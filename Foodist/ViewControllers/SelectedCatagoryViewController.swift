@@ -11,19 +11,28 @@ import UIKit
 class SelectedCatagoryViewController: UIViewController {
     
     //MARK:- Outlets
-    @IBOutlet weak var collectionView: UICollectionView!
+ /*   @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
     //MARK:- Properties
-    let cellIdentifier = "selectedCatagoryCell"
+    let cellIdentifier = "selectedCatagoryCell"*/
+    var index = 0
     
+    @IBOutlet weak var sampleLabel: UILabel!
+    var sampleData = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("inside viewDidLoad ",index)
+       setUpViewController()
         // Do any additional setup after loading the view.
     }
     
-
+    func setUpViewController() {
+  //  index += 1
+    sampleLabel.text = "\(index) \(sampleData)"
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -36,7 +45,7 @@ class SelectedCatagoryViewController: UIViewController {
 
 }
 
-extension SelectedCatagoryViewController: UICollectionViewDataSource,UISearchControllerDelegate {
+/*extension SelectedCatagoryViewController: UICollectionViewDataSource,UISearchControllerDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -48,4 +57,4 @@ extension SelectedCatagoryViewController: UICollectionViewDataSource,UISearchCon
     }
     
     
-}
+}*/

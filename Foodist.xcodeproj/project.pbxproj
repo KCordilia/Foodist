@@ -13,6 +13,7 @@
 		06424A1522DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A1422DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift */; };
 		06424A1722DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A1622DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift */; };
 		06424A1922DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06424A1822DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift */; };
+		066EC06122E05C9C002D9704 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EC06022E05C9C002D9704 /* PageViewController.swift */; };
 		8A64804022DF46CC001B3A45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A64803F22DF46CC001B3A45 /* AppDelegate.swift */; };
 		8A64804222DF46CC001B3A45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A64804122DF46CC001B3A45 /* ViewController.swift */; };
 		8A64804522DF46CC001B3A45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A64804322DF46CC001B3A45 /* Main.storyboard */; };
@@ -27,6 +28,7 @@
 		06424A1422DF6F0C00DD93A9 /* AllCatagoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCatagoriesTableViewCell.swift; sourceTree = "<group>"; };
 		06424A1622DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCatagoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		06424A1822DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCatagoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		066EC06022E05C9C002D9704 /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		8A64803C22DF46CC001B3A45 /* Foodist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foodist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A64803F22DF46CC001B3A45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A64804122DF46CC001B3A45 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				8A64804122DF46CC001B3A45 /* ViewController.swift */,
 				06424A0F22DF694600DD93A9 /* AllCatagoriesViewController.swift */,
 				06424A1122DF6D6D00DD93A9 /* SelectedCatagoryViewController.swift */,
+				066EC06022E05C9C002D9704 /* PageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				06424A1722DF6F3D00DD93A9 /* AllCatagoryCollectionViewCell.swift in Sources */,
 				06424A1922DF708D00DD93A9 /* SelectedCatagoryCollectionViewCell.swift in Sources */,
 				8A64804022DF46CC001B3A45 /* AppDelegate.swift in Sources */,
+				066EC06122E05C9C002D9704 /* PageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

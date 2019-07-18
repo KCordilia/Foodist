@@ -19,6 +19,7 @@ class AllCatagoriesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.separatorStyle = .none
         // Do any additional setup after loading the view.
     }
     
