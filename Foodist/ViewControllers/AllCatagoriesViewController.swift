@@ -15,10 +15,11 @@ class AllCatagoriesViewController: UIViewController {
     
     //MARK:- Properties
     let cellIdentifier = "allCatagoryCell"
-    var catagories: Category?
+    var catagories: [Category]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.separatorStyle = .none
         
         //load catagory. find catagories and attach it to Url and pass the url to networking function. for now default catagory is main+course.
@@ -26,10 +27,14 @@ class AllCatagoriesViewController: UIViewController {
         var recipeList: RecipeList?
         let networkHandler = NetworkHandler()
         networkHandler.getAPIData(urlString, result: recipeList) { (result) in
-            recipeList = result as! RecipeList
-            print(recipeList)
+            recipeList = result as? RecipeList
+            self.catagories = [Category(name: "Main Course", recipes: recipeList!.results, isUserPreference: false)]
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            
         }
-        }
+    }
     
     
 
@@ -46,7 +51,7 @@ class AllCatagoriesViewController: UIViewController {
 }
 extension AllCatagoriesViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return catagories?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
