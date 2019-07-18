@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		8A8EE1DB22E05B4100887926 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EE1DA22E05B4100887926 /* Ingredients.swift */; };
 		8A8EE1DD22E05E2500887926 /* IngredientAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EE1DC22E05E2500887926 /* IngredientAPI.swift */; };
 		8A8EE1DF22E061B400887926 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EE1DE22E061B400887926 /* RecipeDetailViewController.swift */; };
+		8AE7BBDE22E07A6E00AD88BF /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7BBDD22E07A6E00AD88BF /* IngredientCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		8A8EE1DA22E05B4100887926 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		8A8EE1DC22E05E2500887926 /* IngredientAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientAPI.swift; sourceTree = "<group>"; };
 		8A8EE1DE22E061B400887926 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
+		8AE7BBDD22E07A6E00AD88BF /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
 		8F62B4831B31455D2F6B8555 /* Pods-Foodist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodist.release.xcconfig"; path = "Target Support Files/Pods-Foodist/Pods-Foodist.release.xcconfig"; sourceTree = "<group>"; };
 		973A4B29BAE6AF5FADE3EF7D /* Pods-Foodist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodist.debug.xcconfig"; path = "Target Support Files/Pods-Foodist/Pods-Foodist.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +77,6 @@
 				973A4B29BAE6AF5FADE3EF7D /* Pods-Foodist.debug.xcconfig */,
 				8F62B4831B31455D2F6B8555 /* Pods-Foodist.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -130,6 +131,7 @@
 		8A64803E22DF46CC001B3A45 /* Foodist */ = {
 			isa = PBXGroup;
 			children = (
+				8AE7BBDC22E07A5400AD88BF /* New Group */,
 				8A36179922DF652B0050790D /* Networking */,
 				8A36179822DF65040050790D /* Playground */,
 				8A36179222DF5FD50050790D /* Models */,
@@ -167,6 +169,14 @@
 				8A64804822DF46CE001B3A45 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8AE7BBDC22E07A5400AD88BF /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				8AE7BBDD22E07A6E00AD88BF /* IngredientCell.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +303,7 @@
 				8A8EE1D922E055CC00887926 /* CategoryAPI.swift in Sources */,
 				8A36179422DF60040050790D /* Category.swift in Sources */,
 				8A8EE1DF22E061B400887926 /* RecipeDetailViewController.swift in Sources */,
+				8AE7BBDE22E07A6E00AD88BF /* IngredientCell.swift in Sources */,
 				8A36179622DF600B0050790D /* Recipe.swift in Sources */,
 				8A8EE1D722E0523B00887926 /* RecipeInstructions.swift in Sources */,
 				8A8EE1DD22E05E2500887926 /* IngredientAPI.swift in Sources */,

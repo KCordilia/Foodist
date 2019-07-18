@@ -25,3 +25,9 @@ struct MetricAmount: Codable {
     let value: Double
     let unit: String
 }
+
+struct SingleIngredient {
+    let name: String
+    let value: Double
+    let unit: String
+}
