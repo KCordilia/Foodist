@@ -52,6 +52,7 @@ class RecipeDetailViewController: UIViewController {
             instructions.forEach { instruction in
                 instruction.steps.forEach { step in
                     self.instructionList.append(step)
+                    self.tableView.reloadData()
                 }
             }
         }
