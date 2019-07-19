@@ -94,23 +94,31 @@
                                     <outletCollection property="gestureRecognizers" destination="SQl-SL-PTV" appends="YES" id="tRT-dY-m79"/>
                                 </connections>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiw-ZA-haD">
-                                <rect key="frame" x="0.0" y="163" width="414" height="24"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdj-Uh-QOA" customClass="BlurEffectView" customModule="Foodist" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="127" width="414" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="rG9-mV-8k8"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiw-ZA-haD">
+                                <rect key="frame" x="0.0" y="164" width="414" height="23"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="shadowOffset" width="1" height="-1"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kiw-ZA-haD" firstAttribute="trailing" secondItem="deU-mN-Vil" secondAttribute="trailing" id="G6B-0R-biP"/>
+                            <constraint firstItem="Fdj-Uh-QOA" firstAttribute="bottom" secondItem="deU-mN-Vil" secondAttribute="bottom" id="HOZ-Em-DeS"/>
                             <constraint firstItem="deU-mN-Vil" firstAttribute="top" secondItem="n73-4O-FNu" secondAttribute="top" id="QGw-A8-rEp"/>
                             <constraint firstItem="kiw-ZA-haD" firstAttribute="bottom" secondItem="deU-mN-Vil" secondAttribute="bottom" id="Uf1-TC-yxN"/>
                             <constraint firstItem="kiw-ZA-haD" firstAttribute="leading" secondItem="deU-mN-Vil" secondAttribute="leading" id="aq4-Yf-HNf"/>
                             <constraint firstAttribute="bottom" secondItem="deU-mN-Vil" secondAttribute="bottom" constant="13" id="cXs-kT-R9S"/>
+                            <constraint firstItem="Fdj-Uh-QOA" firstAttribute="trailing" secondItem="drA-mD-IyM" secondAttribute="trailing" id="eeV-ex-OsM"/>
                             <constraint firstItem="deU-mN-Vil" firstAttribute="leading" secondItem="drA-mD-IyM" secondAttribute="leading" id="kEU-zL-HKR"/>
+                            <constraint firstItem="Fdj-Uh-QOA" firstAttribute="leading" secondItem="drA-mD-IyM" secondAttribute="leading" id="poH-ED-yQU"/>
                             <constraint firstItem="drA-mD-IyM" firstAttribute="trailing" secondItem="deU-mN-Vil" secondAttribute="trailing" id="q0h-Fy-EDm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="drA-mD-IyM"/>
@@ -129,7 +137,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2578" y="-786"/>
+            <point key="canvasLocation" x="2576.811594202899" y="-786.16071428571422"/>
         </scene>
         <!--RecipeDetail-->
         <scene sceneID="20v-Yd-HKc">
@@ -255,6 +263,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wJv-5p-vtM"/>
+        <segue reference="TAS-yo-2Vb"/>
     </inferredMetricsTieBreakers>
 </document>
