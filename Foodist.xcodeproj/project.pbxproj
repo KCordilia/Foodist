@@ -26,6 +26,7 @@
 		8A8EE1DB22E05B4100887926 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EE1DA22E05B4100887926 /* Ingredients.swift */; };
 		8A8EE1DF22E061B400887926 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A8EE1DE22E061B400887926 /* RecipeDetailViewController.swift */; };
 		8AE7BBDE22E07A6E00AD88BF /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7BBDD22E07A6E00AD88BF /* IngredientCell.swift */; };
+		8AE7BBE022E1CF0D00AD88BF /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE7BBDF22E1CF0D00AD88BF /* BlurEffectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		8A8EE1DA22E05B4100887926 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		8A8EE1DE22E061B400887926 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
 		8AE7BBDD22E07A6E00AD88BF /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
+		8AE7BBDF22E1CF0D00AD88BF /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		8F62B4831B31455D2F6B8555 /* Pods-Foodist.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodist.release.xcconfig"; path = "Target Support Files/Pods-Foodist/Pods-Foodist.release.xcconfig"; sourceTree = "<group>"; };
 		973A4B29BAE6AF5FADE3EF7D /* Pods-Foodist.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodist.debug.xcconfig"; path = "Target Support Files/Pods-Foodist/Pods-Foodist.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,6 +173,7 @@
 				06424A0C22DF5C2100DD93A9 /* RecipeDetail.storyboard */,
 				8A64804322DF46CC001B3A45 /* Main.storyboard */,
 				8A64804822DF46CE001B3A45 /* LaunchScreen.storyboard */,
+				8AE7BBDF22E1CF0D00AD88BF /* BlurEffectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				06C0A3A222E0B0A500120DE1 /* PageViewController.swift in Sources */,
 				8A8EE1D722E0523B00887926 /* RecipeInstructions.swift in Sources */,
 				06C0A3AC22E0CBD800120DE1 /* NetworkHandler.swift in Sources */,
+				8AE7BBE022E1CF0D00AD88BF /* BlurEffectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

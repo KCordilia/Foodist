@@ -15,28 +15,22 @@ class RecipeDetailViewController: UIViewController {
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cookingTimeLabel: UILabel!
-    let recipeId = 482574
     var ingredientList: [SingleIngredient] = []
     var instructionList: [RecipeStep] = []
     var ingredient: RecipeIngredient?
     var recipe: Recipe?
     var instruction: [RecipeInstructions]?
+    let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let recipeInformationEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/information"
-        let ingredientsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/ingredientWidget.json"
-        let instructionsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/analyzedInstructions"
+        guard
+            let recipe = recipe
+            else { return }
+        let recipeInformationEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/information"
+        let ingredientsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/ingredientWidget.json"
+        let instructionsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/analyzedInstructions"
         let networkHandler = NetworkHandler()
-        
-        networkHandler.getAPIData(recipeInformationEndpoint) { (result: Recipe?) in
-            self.recipe = result
-            DispatchQueue.main.async {
-                if let recipe = self.recipe {
-                    self.loadRecipe(recipe)
-                }
-            }
-        }
         
         networkHandler.getAPIData(ingredientsEndpoint) { (result: RecipeIngredient?) in
             self.ingredient = result
@@ -57,11 +51,12 @@ class RecipeDetailViewController: UIViewController {
                 }
             }
         }
+        loadRecipe(recipe)
     }
     
     func loadRecipe(_ recipe: Recipe) {
         recipeTitle.text = recipe.title
-        let recipeImageUrl = recipe.image
+        let recipeImageUrl = recipeImageEndpoint + recipe.image
         let cookingTime = recipe.readyInMinutes
         if let url = URL(string: recipeImageUrl) {
             recipeImage.kf.setImage(with: url)
