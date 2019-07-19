@@ -48,7 +48,7 @@ class PageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
-        endPoint = endPoint + favouriteCatagory + "&number=5"
+        endPoint = endPoint + favouriteCatagory + "&number=\(numberOfPages)"
         
         let networkHandler = NetworkHandler()
         networkHandler.getAPIData(endPoint) { (recipeList: RecipeList?) in
