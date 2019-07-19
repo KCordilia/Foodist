@@ -57,6 +57,10 @@ extension AllCatagoriesViewController: UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AllCatagoriesTableViewCell
             else { preconditionFailure("deque cell failed in selected allcatagory table view ") }
+        if let catagory = catagories?[indexPath.row] {
+        cell.catagoryName.text = catagory.name
+        cell.setUpRecipies(catagory.recipes)       
+        }
         return cell
     }
     

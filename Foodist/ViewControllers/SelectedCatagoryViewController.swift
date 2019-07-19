@@ -11,33 +11,38 @@ import UIKit
 class SelectedCatagoryViewController: UIViewController {
     
     //MARK:- Outlets
- 
-    var index = 0
+    @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var recipeNameLabel: UILabel!
     
-    @IBOutlet weak var sampleLabel: UILabel!
+    var index = 0
+    var recipe: Recipe?
     var sampleData = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print("inside viewDidLoad ",index)
-       setUpViewController()
-        // Do any additional setup after loading the view.
+        setUpViewController()
+    }
+    
+    @IBAction func recipeImageTapped(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "showDetail", sender: self)
     }
     
     func setUpViewController() {
-  //  index += 1
-    sampleLabel.text = "\(index) \(sampleData)"
+        guard let recipe = recipe else { return }
+        let recipeImageEndpoint = "https://spoonacular.com/recipeImages/" + recipe.image
+        if let imageUrl = URL(string: recipeImageEndpoint) {
+            recipeImageView.kf.setImage(with: imageUrl)
+        }
+        recipeNameLabel.text = recipe.title
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail" {
+            guard let destinationController = segue.destination as? RecipeDetailViewController
+                else { return }
+            guard let recipe = recipe else { return }
+            destinationController.recipe = recipe
+        }
     }
-    */
-
 }
 
