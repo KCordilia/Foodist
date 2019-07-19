@@ -16,7 +16,7 @@ class SelectedCatagoryViewController: UIViewController {
     
     var index = 0
     var recipe: Recipe?
-    var sampleData = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("inside viewDidLoad ",index)
