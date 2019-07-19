@@ -46,9 +46,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="EuY-Rx-pfj"/>
-                    <connections>
-                        <segue destination="Kah-ky-xHE" kind="show" identifier="showDetail" id="Mlg-bh-0nR"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -90,7 +87,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="deU-mN-Vil">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="deU-mN-Vil">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="187"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -122,6 +119,7 @@
                     <connections>
                         <outlet property="recipeImageView" destination="deU-mN-Vil" id="ZDB-sZ-xZZ"/>
                         <outlet property="recipeNameLabel" destination="kiw-ZA-haD" id="Mff-4T-nNg"/>
+                        <segue destination="Kah-ky-xHE" kind="show" identifier="showDetail" id="TAS-yo-2Vb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ike-ED-6TP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,7 +151,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="374" height="480"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="allCatagoryCell" rowHeight="123" id="p3A-pj-tfX" customClass="AllCatagoriesTableViewCell" customModule="Foodist" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="allCatagoryTCell" rowHeight="123" id="p3A-pj-tfX" customClass="AllCatagoriesTableViewCell" customModule="Foodist" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="123"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p3A-pj-tfX" id="4OE-RX-j8s">
@@ -161,7 +159,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7gV-6V-Dhn">
-                                                    <rect key="frame" x="8" y="8" width="350" height="25"/>
+                                                    <rect key="frame" x="20" y="11" width="326" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="aZo-cm-vlg"/>
                                                     </constraints>
@@ -170,7 +168,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iVd-uS-IMa">
-                                                    <rect key="frame" x="8" y="41" width="358" height="73.5"/>
+                                                    <rect key="frame" x="20" y="44" width="334" height="68"/>
                                                     <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nhG-Dz-Ywo">
                                                         <size key="itemSize" width="50" height="50"/>
@@ -179,8 +177,8 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="allcatagoryCell" id="2q9-B8-o3Q" customClass="AllCatagoryCollectionViewCell" customModule="Foodist" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="12" width="50" height="50"/>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="allcatagoryCCell" id="2q9-B8-o3Q" customClass="AllCatagoryCollectionViewCell" customModule="Foodist" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="9" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -248,6 +246,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="gqV-2M-por" id="3ac-vm-oAE"/>
+                        <segue destination="Kah-ky-xHE" kind="show" identifier="showDetail" id="wJv-5p-vtM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1c2-jU-I3W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,4 +254,7 @@
             <point key="canvasLocation" x="1473.913043478261" y="91.741071428571431"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="wJv-5p-vtM"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -14,8 +14,11 @@ class AllCatagoriesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //MARK:- Properties
-    let cellIdentifier = "allCatagoryCell"
+    let cellIdentifier = "allCatagoryTCell"
+    let collectionViewcellIdentifier = "allcatagoryCCell"
+    let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
     var catagories: [Category]?
+    var selectedRecipe: Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,27 +29,33 @@ class AllCatagoriesViewController: UIViewController {
         let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=main+course"
         var recipeList: RecipeList?
         let networkHandler = NetworkHandler()
-        networkHandler.getAPIData(urlString, result: recipeList) { (result) in
-            recipeList = result as? RecipeList
-            self.catagories = [Category(name: "Main Course", recipes: recipeList!.results, isUserPreference: false)]
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+        networkHandler.getAPIData(urlString) { (result: RecipeList?) in
+            recipeList = result
+            if let recipeList = recipeList {
+                self.catagories = [Category(name: "Main Course", recipes: recipeList.results, isUserPreference: false)]
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
-            
         }
     }
     
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetail" {
+            guard let destinationController = segue.destination as? RecipeDetailViewController
+                else { return }
+        
+            guard let recipe = selectedRecipe else { return }
+            destinationController.recipe = recipe
+        }
     }
-    */
+    
 
 }
 extension AllCatagoriesViewController: UITableViewDataSource,UITableViewDelegate {
@@ -59,7 +68,10 @@ extension AllCatagoriesViewController: UITableViewDataSource,UITableViewDelegate
             else { preconditionFailure("deque cell failed in selected allcatagory table view ") }
         if let catagory = catagories?[indexPath.row] {
         cell.catagoryName.text = catagory.name
-        cell.setUpRecipies(catagory.recipes)       
+            cell.collectionView.dataSource = self
+            cell.collectionView.delegate = self
+            cell.collectionView.reloadData()
+            cell.collectionView.tag = indexPath.item
         }
         return cell
     }
@@ -67,4 +79,48 @@ extension AllCatagoriesViewController: UITableViewDataSource,UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
     }
+}
+
+extension AllCatagoriesViewController: UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let catagory = catagories?[collectionView.tag] {
+            let recipies = catagory.recipes
+            return recipies.count
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewcellIdentifier, for: indexPath) as? AllCatagoryCollectionViewCell
+            else { preconditionFailure("deque cell failed in selected catagory collection view ") }
+        
+        if let catagory = catagories?[collectionView.tag] {
+            let recipe = catagory.recipes[indexPath.item]
+            cell.recipeName.text = recipe.title
+                let imageUrl = recipeImageEndpoint + recipe.image
+                if let url = URL(string: imageUrl) {
+                    cell.recipeImage.kf.setImage(with: url)
+                }
+           
+        }
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = collectionView.frame.height
+        let width = height
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let catagory = catagories?[collectionView.tag] {
+            let recipe = catagory.recipes[indexPath.item]
+            selectedRecipe = recipe
+            performSegue(withIdentifier: "showDetail", sender: self)
+            }
+        
+    }
+    
 }
