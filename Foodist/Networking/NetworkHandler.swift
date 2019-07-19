@@ -9,9 +9,11 @@
 import Foundation
 
 struct NetworkHandler {
-    func getAPIData<T: Codable>(_ url: String, result: T,completion: @escaping (Codable) -> Void) {
+    func getAPIData<T: Codable>(_ url: String, completion: @escaping (T?) -> Void) {
         let session = URLSession.shared
-        guard let url = URL(string: url) else { return }
+        guard
+            let url = URL(string: url)
+            else { return }
         var request = URLRequest(url: url)
         request.addValue("6d4b0c4e3bmsh16b8d0615ae873bp1510ccjsnc4cc6ac1e186", forHTTPHeaderField: "X-RapidAPI-Key")
         request.addValue("spoonacular-recipe-food-nutrition-v1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
@@ -19,7 +21,7 @@ struct NetworkHandler {
             if error == nil {
                 if let data = data {
                     // completion(data)
-                    self.decode(codableStruct: result, data: data, completion: { (resultantStructure) in
+                    self.decode(data: data, completion: { (resultantStructure) in
                         //print(resultantStructure)
                         completion(resultantStructure)
                     })
@@ -33,7 +35,7 @@ struct NetworkHandler {
         task.resume()
     }
     
-    private func decode<CodableStruct: Codable> (codableStruct: CodableStruct , data: Data, completion: (CodableStruct?)->Void) {
+    private func decode<CodableStruct: Codable> (data: Data, completion: (CodableStruct?)->Void) {
         
         do {
             let decoder = JSONDecoder()

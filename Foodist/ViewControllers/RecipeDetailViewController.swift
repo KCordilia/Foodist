@@ -15,70 +15,72 @@ class RecipeDetailViewController: UIViewController {
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cookingTimeLabel: UILabel!
-    let recipeId = 532952
+    let recipeId = 482574
     var ingredientList: [SingleIngredient] = []
     var instructionList: [RecipeStep] = []
+    var ingredient: RecipeIngredient?
     var recipe: Recipe?
+    var instruction: [RecipeInstructions]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       let url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/information"
+        let recipeInformationEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/information"
+        let ingredientsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/ingredientWidget.json"
+        let instructionsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipeId)/analyzedInstructions"
         let networkHandler = NetworkHandler()
-        networkHandler.getAPIData(url, result: recipe) { (result) in
-            self.recipe = result as? Recipe
+        
+        networkHandler.getAPIData(recipeInformationEndpoint) { (result: Recipe?) in
+            self.recipe = result
             DispatchQueue.main.async {
                 if let recipe = self.recipe {
-                self.loadRecipe(recipe)
+                    self.loadRecipe(recipe)
                 }
             }
         }
         
-
-       /* RecipeServerNetworking.loadRecipeData(id: recipeId) { recipe in
-            guard
-                let recipeName = recipe?.title,
-                let recipeImageUrl = recipe?.image,
-                let cookingTime = recipe?.readyInMinutes
-                else { return}
-            let url = URL(string: recipeImageUrl)
+        networkHandler.getAPIData(ingredientsEndpoint) { (result: RecipeIngredient?) in
+            self.ingredient = result
             DispatchQueue.main.async {
-                self.recipeTitle.text = recipeName
-                self.recipeImage.kf.setImage(with: url)
-                self.cookingTimeLabel.text = "\(cookingTime)"
+                if let ingredient = self.ingredient {
+                    self.loadIngredients(ingredient)
+                   self.tableView.reloadData()
+                }
             }
         }
-        */
-        IngredientServerNetworking.loadIngredientData(id: recipeId) { ingredients in
-            guard
-                let ingredients = ingredients
-                else { return }
-            ingredients.ingredients.forEach({ singleIngredient in
-                DispatchQueue.main.async {
-                    self.ingredientList.append(SingleIngredient(name: singleIngredient.name, value: singleIngredient.amount.metric.value, unit: singleIngredient.amount.metric.unit))
-                    self.tableView.reloadData()
-                }
-            })
-        }
         
-        RecipeInstructionsServerNetworking.loadRecipeInstructionsData(id: recipeId) { instructions in
-            instructions.forEach { instruction in
-                instruction.steps.forEach { step in
-                    self.instructionList.append(step)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+        networkHandler.getAPIData(instructionsEndpoint) { (result: [RecipeInstructions]?) in
+            self.instruction = result
+            DispatchQueue.main.async {
+                if let instruction = self.instruction {
+                    self.loadInstructions(instruction)
+                    self.tableView.reloadData()
                 }
             }
         }
     }
+    
     func loadRecipe(_ recipe: Recipe) {
-         self.recipeTitle.text = recipe.title
+        recipeTitle.text = recipe.title
         let recipeImageUrl = recipe.image
         let cookingTime = recipe.readyInMinutes
         if let url = URL(string: recipeImageUrl) {
-        recipeImage.kf.setImage(with: url)
+            recipeImage.kf.setImage(with: url)
         }
         cookingTimeLabel.text = "\(cookingTime)"
+    }
+    
+    func loadIngredients(_ ingredient: RecipeIngredient) {
+        ingredient.ingredients.forEach { ingredient in
+            ingredientList.append(SingleIngredient(name: ingredient.name, value: ingredient.amount.metric.value, unit: ingredient.amount.metric.unit))
+        }
+    }
+    
+    func loadInstructions(_ instruction: [RecipeInstructions]) {
+        instruction.forEach { instruction in
+            instruction.steps.forEach({ steps in
+                instructionList.append(steps)
+            })
+        }
     }
 }
 
