@@ -12,7 +12,5 @@ class AllCatagoriesTableViewCell: UITableViewCell {
 
     @IBOutlet weak var catagoryName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    
+
 }
-
-

@@ -14,7 +14,7 @@ class SpeechViewController: UIViewController {
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     let speechSynthesizer = AVSpeechSynthesizer()
-    let speechUtterance = AVSpeechUtterance(string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et purus sit amet arcu elementum suscipit id eu lacus. Morbi vitae ullamcorper metus, vel pharetra sem. Nulla elementum libero in iaculis ullamcorper. Praesent fermentum erat sed arcu euismod lacinia. Integer eget felis dignissim, feugiat dolor quis, pellentesque velit. Ut ut pellentesque ex. Proin interdum sagittis turpis, at fringilla lacus consequat sit amet. Morbi eget felis dolor. Maecenas accumsan augue vitae dui porta rutrum. Maecenas libero massa, iaculis eu commodo eu, eleifend id neque. Nam posuere nisi eu dui ultricies, sed feugiat ipsum euismod. Phasellus sed nisi ex. Aliquam at ex nec nisi mollis venenatis a sed orci.")
+    let speechUtterance = AVSpeechUtterance(string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et purus sit amet arcu elementum suscipit id eu lacus. Morbi vitae ullamcorper.")
     var currentState: State = .stopped
     
     override func viewDidLoad() {
@@ -29,15 +29,18 @@ class SpeechViewController: UIViewController {
     }
     
     @IBAction func play(_ sender: Any) {
-        play(stringToPlay: speechUtterance)
-        playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
-        currentState = .playing
-        setAvailabiltyForControls()
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
-            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("audioSession properties weren't set because of an error.")
+            play(stringToPlay: speechUtterance)
+            playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
+            currentState = .playing
+            setAvailabiltyForControls()
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
+                try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            } catch {
+                print("audioSession properties weren't set because of an error.")
+            }
+        defer {
+            disableAVSession()
         }
     }
     
@@ -54,6 +57,14 @@ class SpeechViewController: UIViewController {
         currentState = .playing
         speechSynthesizer.speak(stringToPlay)
         setAvailabiltyForControls()
+    }
+    
+    private func disableAVSession() {
+        do {
+            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("audioSession properties weren't disable.")
+        }
     }
     
     func pause() {
@@ -73,8 +84,8 @@ class SpeechViewController: UIViewController {
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.word)
             currentState = .stopped
+            playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
         }
-        
     }
     
     func initialSetup() {
@@ -92,5 +103,4 @@ class SpeechViewController: UIViewController {
             nextButton.isEnabled = false
         }
     }
-
 }
