@@ -46,7 +46,7 @@ struct NetworkHandler {
         hostHeader = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
     }
     
-    func getAPIData<T: Codable>(_ url: String, completion: @escaping (T?) -> Void) {
+    func getAPIData<T: Codable>(_ url: String, completion: @escaping (Result<T,NetworkError>) -> Void) {
         
         let session = URLSession.shared
         guard
@@ -61,19 +61,20 @@ struct NetworkHandler {
                     // completion(data)
                     self.decode(data: data, completion: { (resultantStructure) in
                         //print(resultantStructure)
-                        completion(resultantStructure)
+                        completion(.success(resultantStructure))
                     })
                 }
             }
             else {
-                print(error)
+                //print(error)
+                completion(.failure(.serverDown))
             }
             
         }
         task.resume()
     }
     
-    private func decode<CodableStruct: Codable> (data: Data, completion: (CodableStruct?)->Void) {
+    private func decode<CodableStruct: Codable> (data: Data, completion: (CodableStruct)->Void) {
         
         do {
             let decoder = JSONDecoder()
@@ -81,7 +82,7 @@ struct NetworkHandler {
             completion(decodedResult)
         } catch let error{
             print(error)
-            completion(nil)
+          //  completion(nil)
         }
     }
     
