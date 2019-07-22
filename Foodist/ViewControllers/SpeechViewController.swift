@@ -29,17 +29,21 @@ class SpeechViewController: UIViewController {
     }
     
     @IBAction func play(_ sender: Any) {
-        play(stringToPlay: speechUtterance)
-        playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
-        currentState = .playing
-        setAvailabiltyForControls()
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
-            try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("audioSession properties weren't set because of an error.")
+            play(stringToPlay: speechUtterance)
+            playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
+            currentState = .playing
+            setAvailabiltyForControls()
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
+                try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            } catch {
+                print("audioSession properties weren't set because of an error.")
+            }
+        defer {
+            disableAVSession()
         }
     }
+    
     
     @IBAction func stop(_ sender: Any) {
         stop()
@@ -54,6 +58,14 @@ class SpeechViewController: UIViewController {
         currentState = .playing
         speechSynthesizer.speak(stringToPlay)
         setAvailabiltyForControls()
+    }
+    
+    private func disableAVSession() {
+        do {
+            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("audioSession properties weren't disable.")
+        }
     }
     
     func pause() {
@@ -73,6 +85,7 @@ class SpeechViewController: UIViewController {
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.word)
             currentState = .stopped
+            playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
         }
         
     }
@@ -92,5 +105,5 @@ class SpeechViewController: UIViewController {
             nextButton.isEnabled = false
         }
     }
-
+    
 }

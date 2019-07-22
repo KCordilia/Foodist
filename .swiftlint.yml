@@ -1,0 +1,5 @@
+excluded:
+ - Pods
+line_length:
+ warning: 200
+ ignores_comments: true
