@@ -12,10 +12,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
        // performSegue(withIdentifier: "showDetail", sender: self)
     }
-
-
 }
-

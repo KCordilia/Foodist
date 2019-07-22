@@ -12,9 +12,8 @@ struct Category: Codable {
     let name: String
     let recipes: [Recipe]
     let isUserPreference: Bool
-    
 }
 
-struct RecipeList: Encodable,Decodable {
+struct RecipeList: Encodable, Decodable {
     let results: [Recipe]
 }
