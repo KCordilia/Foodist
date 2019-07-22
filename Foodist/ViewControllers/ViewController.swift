@@ -12,6 +12,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       // performSegue(withIdentifier: "showDetail", sender: self)
+        let settingsButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        settingsButton.backgroundColor = .white
+        settingsButton.setImage(UIImage(named: "settings"), for: .normal)
+        let barButton = UIBarButtonItem(customView: settingsButton)
+        navigationController?.navigationItem.setLeftBarButton(barButton, animated: true)
     }
 }
