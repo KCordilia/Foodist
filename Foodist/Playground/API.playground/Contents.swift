@@ -1,4 +1,4 @@
-import Foundation
+//import Foundation
 import AVFoundation
 
 enum State {
@@ -7,35 +7,47 @@ enum State {
     case stopped
 }
 
-func initialSetup() {
-    stop()
-}
+let speechSynthesizer = AVSpeechSynthesizer()
+let speechUtterance = AVSpeechUtterance(string: "This is a test. and now it will pause god knows where. Help me!")
+speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
+speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
 
 func play(stringToPlay: AVSpeechUtterance, index: Int) {
     currentState = .playing
-    // Speech synthesizer will play
     // play button image should change to pause image
     speechSynthesizer.speak(stringToPlay)
 }
 
 func pause() {
-    currentState = .paused
     // Speech synthesizer will pause
+    if speechSynthesizer.isSpeaking {
+        speechSynthesizer.pauseSpeaking(at: AVSpeechBoundary.word)
+        currentState = .paused
+    } else {
+        play(stringToPlay: speechUtterance, index: 0)
+        currentState = .playing
+    }
     // pause button image should change to play image
 }
 
 func stop() {
-    currentState = .stopped
     // Speech synthesizer will stop
+    if speechSynthesizer.isSpeaking {
+        speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.word)
+        currentState = .stopped
+    }
     // previous and next buttons are disabled
 }
 
+func initialSetup() {
+    stop()
+}
+
 var currentState: State = .stopped
-let speechSynthesizer = AVSpeechSynthesizer()
-let speechUtterance = AVSpeechUtterance(string: "This is a test. This is only a test. If this was an actual emergency, then this wouldn’t have been a test.")
-speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
-speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+
 play(stringToPlay: speechUtterance, index: 0)
+print(currentState)
+
 
 
 
