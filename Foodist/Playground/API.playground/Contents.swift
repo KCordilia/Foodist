@@ -47,8 +47,3 @@ var currentState: State = .stopped
 
 play(stringToPlay: speechUtterance, index: 0)
 print(currentState)
-
-
-
-
-

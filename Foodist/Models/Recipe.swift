@@ -9,6 +9,7 @@
 import Foundation
 
 struct Recipe: Codable {
+    // swiftlint:disable:next identifier_name
     let id: Int
     let title: String
     let readyInMinutes: Int

@@ -9,24 +9,23 @@
 import UIKit
 
 class SelectedCatagoryViewController: UIViewController {
-    
-    //MARK:- Outlets
+    // MARK: - Outlets
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var recipeNameLabel: UILabel!
-    
+
     var index = 0
     var recipe: Recipe?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("inside viewDidLoad ",index)
+        print("inside viewDidLoad ", index)
         setUpViewController()
     }
-    
+
     @IBAction func recipeImageTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "showDetail", sender: self)
     }
-    
+
     func setUpViewController() {
         guard let recipe = recipe else { return }
         let recipeImageEndpoint = "https://spoonacular.com/recipeImages/" + recipe.image
@@ -35,7 +34,7 @@ class SelectedCatagoryViewController: UIViewController {
         }
         recipeNameLabel.text = recipe.title
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             guard let destinationController = segue.destination as? RecipeDetailViewController
@@ -45,4 +44,3 @@ class SelectedCatagoryViewController: UIViewController {
         }
     }
 }
-
