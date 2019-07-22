@@ -20,9 +20,9 @@ enum SearchParams {
 enum FoodType: String {
     case mainCourse = "main+course",sideDish = "side+dish", dessert, appetizer, salad, bread, breakfast, soup, beverage, sauce, drink
 }
-enum CuisineType: String {
+/*enum CuisineType: String {
     case african, chinese, japanese, korean, vietnamese, thai, indian, british, irish, french, italian, mexican, spanish, middleEastern = "middle+eastern", jewish, american, cajun, southern, greek, german, nordic, easterneuropean, caribbean,latinAmerican = "latin+american"
-}
+}*/
 enum Intolerances {
     case dairy, egg, gluten, peanut
 }
@@ -42,7 +42,7 @@ struct NetworkEndpoint {
         return searchParams
     }
     
-     func getSearchUrl(for catagory: CuisineType) -> String {
+  /*   func getSearchUrl(for catagory: CuisineType) -> String {
         var searchType = ""
       //  case .failure(let error) = result
         if catagory == CuisineType.middleEastern {
@@ -57,7 +57,7 @@ struct NetworkEndpoint {
         
         let url = recipeSearch + searchType
         return url
-    }
+    }*/
     
     func getCombinedUrl() -> String {
         return ""

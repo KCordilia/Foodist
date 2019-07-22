@@ -28,9 +28,16 @@ class AllCatagoriesViewController: UIViewController {
         //load catagory. find catagories and attach it to Url and pass the url to networking function. for now default catagory is main+course.
         let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=main+course"
         var recipeList: RecipeList?
-        let networkHandler = NetworkHandler()
-        networkHandler.getAPIData(urlString) { (result: RecipeList?) in
-            recipeList = result
+        var networkHandler = NetworkHandler()
+        networkHandler.setUpHeaders()
+        networkHandler.getAPIData(urlString) { (result: Result<RecipeList,NetworkError>) in
+            if case .failure(let error) = result {
+                print(error)
+            }
+            guard
+                case .success(let value) = result
+                else { return }
+            recipeList = value
             if let recipeList = recipeList {
                 self.catagories = [Category(name: "Main Course", recipes: recipeList.results, isUserPreference: false)]
                 DispatchQueue.main.async {

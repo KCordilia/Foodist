@@ -58,32 +58,39 @@ struct NetworkHandler {
         let task = session.dataTask(with: request) { (data, response, error) in
             if error == nil {
                 if let data = data {
-                    // completion(data)
-                    self.decode(data: data, completion: { (resultantStructure) in
-                        //print(resultantStructure)
-                        completion(.success(resultantStructure))
-                    })
+                    
+                    let result: Result<T,Error> = self.decode(data: data)
+                    
+                    if case .failure(let error) = result {
+                        print(error)
+                    }
+                    guard
+                        case .success(let value) = result
+                        else { return }
+                    completion(.success(value))
                 }
             }
+                
             else {
-                //print(error)
+                print(error!)
                 completion(.failure(.serverDown))
             }
             
         }
         task.resume()
     }
+
     
-    private func decode<CodableStruct: Codable> (data: Data, completion: (CodableStruct)->Void) {
+    private func decode<CodableStruct: Codable> (data: Data) -> Result<CodableStruct,Error> {
         
         do {
             let decoder = JSONDecoder()
             let decodedResult = try decoder.decode(CodableStruct.self, from: data)
-            completion(decodedResult)
+            return .success(decodedResult)
         } catch let error{
-            print(error)
-          //  completion(nil)
+            return .failure(error)
         }
     }
-    
 }
+    
+
