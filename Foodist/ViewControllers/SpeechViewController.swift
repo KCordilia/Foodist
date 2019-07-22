@@ -9,47 +9,53 @@
 import UIKit
 import AVFoundation
 
+protocol Speakable {
+    func setUpTextToSpeak(_ text: String)
+}
+
 class SpeechViewController: UIViewController {
     @IBOutlet weak var playButtonImage: UIButton!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     let speechSynthesizer = AVSpeechSynthesizer()
-    let speechUtterance = AVSpeechUtterance(string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et purus sit amet arcu elementum suscipit id eu lacus. Morbi vitae ullamcorper.")
-
+    var speechUtterance: AVSpeechUtterance?
+    var recipeInstructions: [String] = []
     var currentState: State = .stopped
+    var text = ""
+   // weak var sourceVc: RecipeDetailViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initialSetup()
-        speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
-        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
     }
 
     @IBAction func previous(_ sender: Any) {
-        print("previous button is tapped")
     }
 
     @IBAction func playAndPause(_ sender: Any) {
         switch currentState {
         case .playing: pause()
-        case .paused: play(stringToPlay: speechUtterance)
-        case .stopped: play(stringToPlay: speechUtterance)
+        case .paused: play(stringToPlay: text)
+        case .stopped: play(stringToPlay: text)
         }
     }
 
     @IBAction func stop(_ sender: Any) {
         stop()
-        print("stop button is tapped")
     }
 
     @IBAction func next(_ sender: Any) {
-        print("next button is tapped")
     }
 
-    func play(stringToPlay: AVSpeechUtterance) {
+    func recieveTextToSpeak(_ text: String) {
+        self.text = text
+    }
+
+    func play(stringToPlay: String) {
+       speechUtterance = AVSpeechUtterance(string: stringToPlay)
+         initialSetup()
         if currentState == .stopped {
             currentState = .playing
-            setAvailabiltyForControls()
+//            setAvailabiltyForControls()
             playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
@@ -57,52 +63,53 @@ class SpeechViewController: UIViewController {
             } catch {
                 print("audioSession properties weren't set because of an error.")
             }
-            speechSynthesizer.speak(stringToPlay)
+            speechSynthesizer.speak(speechUtterance!)
         } else if currentState == .paused {
             speechSynthesizer.continueSpeaking()
             playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
+            currentState = .playing
         } else {
-            speechSynthesizer.speak(stringToPlay)
+            speechSynthesizer.speak(speechUtterance!)
         }
     }
 
     func pause() {
-        // Speech synthesizer will pause
         currentState = .paused
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.pauseSpeaking(at: AVSpeechBoundary.word)
             playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
         } else {
-            play(stringToPlay: speechUtterance)
+            play(stringToPlay: text)
             currentState = .playing
         }
     }
 
     func stop() {
-        // Speech synthesizer will stop
         currentState = .stopped
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.word)
             playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
             disableAVSession()
-            setAvailabiltyForControls()
+//            setAvailabiltyForControls()
         }
     }
 
     func initialSetup() {
         stop()
-        setAvailabiltyForControls()
+//        setAvailabiltyForControls()
+        speechUtterance!.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
+        speechUtterance!.voice = AVSpeechSynthesisVoice(language: "en-US")
     }
-
-    func setAvailabiltyForControls() {
-        if currentState == .playing {
-            previousButton.isEnabled = true
-            nextButton.isEnabled = true
-        } else {
-            previousButton.isEnabled = false
-            nextButton.isEnabled = false
-        }
-    }
+//
+//    func setAvailabiltyForControls() {
+//        if currentState == .playing {
+//            previousButton.isEnabled = true
+//            nextButton.isEnabled = true
+//        } else {
+//            previousButton.isEnabled = false
+//            nextButton.isEnabled = false
+//        }
+//    }
 
     private func disableAVSession() {
         do {
@@ -110,5 +117,11 @@ class SpeechViewController: UIViewController {
         } catch {
             print("audioSession properties weren't disabled.")
         }
+    }
+}
+
+extension SpeechViewController: Speakable {
+    func setUpTextToSpeak(_ text: String) {
+        self.text = text
     }
 }
