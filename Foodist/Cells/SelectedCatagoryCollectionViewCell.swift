@@ -9,7 +9,7 @@
 import UIKit
 
 class SelectedCatagoryCollectionViewCell: UICollectionViewCell {
-    
+
     @IBOutlet weak var recipeLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
 }

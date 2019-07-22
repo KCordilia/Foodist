@@ -14,7 +14,7 @@ class SpeechViewController: UIViewController {
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     let speechSynthesizer = AVSpeechSynthesizer()
-    let speechUtterance = AVSpeechUtterance(string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et purus sit amet arcu elementum suscipit id eu lacus. Morbi vitae ullamcorper metus, vel pharetra sem. Nulla elementum libero in iaculis ullamcorper. Praesent fermentum erat sed arcu euismod lacinia. Integer eget felis dignissim, feugiat dolor quis, pellentesque velit. Ut ut pellentesque ex. Proin interdum sagittis turpis, at fringilla lacus consequat sit amet. Morbi eget felis dolor. Maecenas accumsan augue vitae dui porta rutrum. Maecenas libero massa, iaculis eu commodo eu, eleifend id neque. Nam posuere nisi eu dui ultricies, sed feugiat ipsum euismod. Phasellus sed nisi ex. Aliquam at ex nec nisi mollis venenatis a sed orci.")
+    let speechUtterance = AVSpeechUtterance(string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et purus sit amet arcu elementum suscipit id eu lacus. Morbi vitae ullamcorper.")
     var currentState: State = .stopped
     
     override func viewDidLoad() {
@@ -43,7 +43,6 @@ class SpeechViewController: UIViewController {
             disableAVSession()
         }
     }
-    
     
     @IBAction func stop(_ sender: Any) {
         stop()
@@ -87,7 +86,6 @@ class SpeechViewController: UIViewController {
             currentState = .stopped
             playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
         }
-        
     }
     
     func initialSetup() {
@@ -105,5 +103,4 @@ class SpeechViewController: UIViewController {
             nextButton.isEnabled = false
         }
     }
-    
 }
