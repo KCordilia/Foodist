@@ -48,9 +48,16 @@ class PageViewController: UIPageViewController {
 
         endPoint += favouriteCatagory + "&number=\(numberOfPages)"
 
-        let networkHandler = NetworkHandler()
-        networkHandler.getAPIData(endPoint) { (recipeList: RecipeList?) in
-            self.recipeList = recipeList
+        var networkHandler = NetworkHandler()
+        networkHandler.setUpHeaders()
+        networkHandler.getAPIData(endPoint) { (result: Result<RecipeList,NetworkError>) in
+            if case .failure(let error) = result {
+                print(error)
+            }
+            guard
+                case .success(let value) = result
+                else { return }
+            self.recipeList = value
             if self.recipeList != nil {
                 DispatchQueue.main.async {
                     self.setUpInitialPage()

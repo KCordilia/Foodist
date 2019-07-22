@@ -29,10 +29,16 @@ class RecipeDetailViewController: UIViewController {
             else { return }
         let ingredientsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/ingredientWidget.json"
         let instructionsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/analyzedInstructions"
-        let networkHandler = NetworkHandler()
-        
-        networkHandler.getAPIData(ingredientsEndpoint) { (result: RecipeIngredient?) in
-            self.ingredient = result
+        var networkHandler = NetworkHandler()
+        networkHandler.setUpHeaders()
+        networkHandler.getAPIData(ingredientsEndpoint) { (result: Result<RecipeIngredient,NetworkError>) in
+            if case .failure(let error) = result {
+                print(error)
+            }
+            guard
+                case .success(let value) = result
+                else { return }
+            self.ingredient = value
             DispatchQueue.main.async {
                 if let ingredient = self.ingredient {
                     self.loadIngredients(ingredient)
@@ -41,8 +47,14 @@ class RecipeDetailViewController: UIViewController {
             }
         }
         
-        networkHandler.getAPIData(instructionsEndpoint) { (result: [RecipeInstructions]?) in
-            self.instruction = result
+        networkHandler.getAPIData(instructionsEndpoint) { (result: Result<[RecipeInstructions],NetworkError>) in
+            if case .failure(let error) = result {
+                print(error)
+            }
+            guard
+                case .success(let value) = result
+                else { return }
+            self.instruction = value
             DispatchQueue.main.async {
                 if let instruction = self.instruction {
                     self.loadInstructions(instruction)
