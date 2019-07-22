@@ -27,7 +27,6 @@ class RecipeDetailViewController: UIViewController {
         guard
             let recipe = recipe
             else { return }
-        let recipeInformationEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/information"
         let ingredientsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/ingredientWidget.json"
         let instructionsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/analyzedInstructions"
         let networkHandler = NetworkHandler()

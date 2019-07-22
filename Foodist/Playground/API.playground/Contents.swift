@@ -1,46 +1,42 @@
 import Foundation
+import AVFoundation
 
-struct RecipeIngredient: Codable {
-    let ingredients: [Ingredient]
+enum State {
+    case playing
+    case paused
+    case stopped
 }
 
-struct Ingredient: Codable {
-    let name: String
-    let amount: IngredientAmount
+func initialSetup() {
+    stop()
 }
 
-struct IngredientAmount: Codable {
-    let metric: MetricAmount
+func play(stringToPlay: AVSpeechUtterance, index: Int) {
+    currentState = .playing
+    // Speech synthesizer will play
+    // play button image should change to pause image
+    speechSynthesizer.speak(stringToPlay)
 }
 
-struct MetricAmount: Codable {
-    let value: Double
-    let unit: String
+func pause() {
+    currentState = .paused
+    // Speech synthesizer will pause
+    // pause button image should change to play image
 }
 
-func getAPIData(completion: @escaping (Data) -> Void) {
-    let session = URLSession.shared
-    guard
-        let url = URL(string:"https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/613045/ingredientWidget.json")
-       
-        else { return }
-    var request = URLRequest(url: url)
-    request.addValue("6d4b0c4e3bmsh16b8d0615ae873bp1510ccjsnc4cc6ac1e186", forHTTPHeaderField: "X-RapidAPI-Key")
-    request.addValue("spoonacular-recipe-food-nutrition-v1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
-    
-    
-    let task = session.dataTask(with: request) { (data, response, error) in
-        completion(data!)
-    }
-    task.resume()
+func stop() {
+    currentState = .stopped
+    // Speech synthesizer will stop
+    // previous and next buttons are disabled
 }
 
-getAPIData { resultData in
-    do {
-        let decoder = JSONDecoder()
-        let decodedResult = try decoder.decode(RecipeIngredient.self, from: resultData)
-        print(decodedResult)
-    } catch let error{
-        print(error)
-    }
-}
+var currentState: State = .stopped
+let speechSynthesizer = AVSpeechSynthesizer()
+let speechUtterance = AVSpeechUtterance(string: "This is a test. This is only a test. If this was an actual emergency, then this wouldn’t have been a test.")
+speechUtterance.rate = AVSpeechUtteranceMaximumSpeechRate / 2.0
+speechUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+play(stringToPlay: speechUtterance, index: 0)
+
+
+
+
