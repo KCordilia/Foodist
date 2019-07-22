@@ -209,8 +209,8 @@
                                         <state key="normal" image="Navigation_Play_2x"/>
                                         <state key="highlighted" image="Navigation_Pause_2x"/>
                                         <connections>
-                                            <action selector="play:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="Apc-V6-Llm"/>
                                             <action selector="play:" destination="vMz-cz-v5q" eventType="touchUpInside" id="ERQ-KO-byw"/>
+                                            <action selector="playAndPause:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="Apc-V6-Llm"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKK-Kv-H8m">

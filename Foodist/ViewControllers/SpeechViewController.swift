@@ -15,6 +15,7 @@ class SpeechViewController: UIViewController {
     @IBOutlet weak var nextButton: UIButton!
     let speechSynthesizer = AVSpeechSynthesizer()
     let speechUtterance = AVSpeechUtterance(string: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi et purus sit amet arcu elementum suscipit id eu lacus. Morbi vitae ullamcorper.")
+
     var currentState: State = .stopped
 
     override func viewDidLoad() {
@@ -28,19 +29,11 @@ class SpeechViewController: UIViewController {
         print("previous button is tapped")
     }
 
-    @IBAction func play(_ sender: Any) {
-            play(stringToPlay: speechUtterance)
-            playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
-            currentState = .playing
-            setAvailabiltyForControls()
-            do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
-                try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
-            } catch {
-                print("audioSession properties weren't set because of an error.")
-            }
-        do {
-            disableAVSession()
+    @IBAction func playAndPause(_ sender: Any) {
+        switch currentState {
+        case .playing: pause()
+        case .paused: play(stringToPlay: speechUtterance)
+        case .stopped: play(stringToPlay: speechUtterance)
         }
     }
 
@@ -54,24 +47,30 @@ class SpeechViewController: UIViewController {
     }
 
     func play(stringToPlay: AVSpeechUtterance) {
-        currentState = .playing
-        speechSynthesizer.speak(stringToPlay)
-        setAvailabiltyForControls()
-    }
-
-    private func disableAVSession() {
-        do {
-            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-        } catch {
-            print("audioSession properties weren't disable.")
+        if currentState == .stopped {
+            currentState = .playing
+            setAvailabiltyForControls()
+            playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
+                try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
+            } catch {
+                print("audioSession properties weren't set because of an error.")
+            }
+            speechSynthesizer.speak(stringToPlay)
+        } else if currentState == .paused {
+            speechSynthesizer.continueSpeaking()
+            playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
+        } else {
+            speechSynthesizer.speak(stringToPlay)
         }
     }
 
     func pause() {
         // Speech synthesizer will pause
+        currentState = .paused
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.pauseSpeaking(at: AVSpeechBoundary.word)
-            currentState = .paused
             playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
         } else {
             play(stringToPlay: speechUtterance)
@@ -81,17 +80,18 @@ class SpeechViewController: UIViewController {
 
     func stop() {
         // Speech synthesizer will stop
+        currentState = .stopped
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.word)
-            currentState = .stopped
             playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
+            disableAVSession()
+            setAvailabiltyForControls()
         }
     }
 
     func initialSetup() {
         stop()
-        previousButton.isEnabled = false
-        nextButton.isEnabled = false
+        setAvailabiltyForControls()
     }
 
     func setAvailabiltyForControls() {
@@ -101,6 +101,14 @@ class SpeechViewController: UIViewController {
         } else {
             previousButton.isEnabled = false
             nextButton.isEnabled = false
+        }
+    }
+
+    private func disableAVSession() {
+        do {
+            try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        } catch {
+            print("audioSession properties weren't disabled.")
         }
     }
 }
