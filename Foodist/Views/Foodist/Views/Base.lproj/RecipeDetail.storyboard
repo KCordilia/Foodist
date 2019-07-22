@@ -193,11 +193,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bzX-o7-rKw">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bzX-o7-rKw">
                                 <rect key="frame" x="30" y="5" width="315" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXQ-hm-mEv">
-                                        <rect key="frame" x="0.0" y="0.0" width="24" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="72.666666666666671" height="40"/>
                                         <state key="normal" image="Navigation_Rewind_2x"/>
                                         <connections>
                                             <action selector="previous:" destination="vMz-cz-v5q" eventType="touchUpInside" id="WRS-VY-Dy7"/>
@@ -205,7 +205,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHj-Bp-Xdr">
-                                        <rect key="frame" x="101.33333333333334" y="0.0" width="17" height="40"/>
+                                        <rect key="frame" x="80.666666666666671" y="0.0" width="73.000000000000014" height="40"/>
                                         <state key="normal" image="Navigation_Play_2x"/>
                                         <state key="highlighted" image="Navigation_Pause_2x"/>
                                         <connections>
@@ -213,6 +213,7 @@
                                             <action selector="play:" destination="vMz-cz-v5q" eventType="touchUpInside" id="ERQ-KO-byw"/>
                                         </connections>
                                     </button>
+<<<<<<< HEAD
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKK-Kv-H8m">
                                         <rect key="frame" x="196" y="0.0" width="17.666666666666657" height="40"/>
                                         <state key="normal" image="Navigation_Stop_2x"/>
@@ -220,9 +221,14 @@
                                             <action selector="stop:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="4dc-Gy-LBq"/>
                                             <action selector="stop:" destination="vMz-cz-v5q" eventType="touchUpInside" id="clo-bK-IXJ"/>
                                         </connections>
+=======
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKK-Kv-H8m">
+                                        <rect key="frame" x="161.66666666666666" y="0.0" width="72.666666666666657" height="40"/>
+                                        <state key="normal" image="icons8-stop-30"/>
+>>>>>>> 926de064dad42e7277dca87beb4c818440e88e3a
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ty-mk-JhI">
-                                        <rect key="frame" x="291" y="0.0" width="24" height="40"/>
+                                        <rect key="frame" x="242.33333333333329" y="0.0" width="72.666666666666657" height="40"/>
                                         <state key="normal" image="Navigation_FastForward_2x"/>
                                         <connections>
                                             <action selector="next:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="4FH-4X-x5F"/>
@@ -260,6 +266,6 @@
         <image name="Navigation_Pause_2x" width="15" height="19"/>
         <image name="Navigation_Play_2x" width="17" height="19"/>
         <image name="Navigation_Rewind_2x" width="24" height="15.5"/>
-        <image name="Navigation_Stop_2x" width="17.5" height="17.5"/>
+        <image name="icons8-stop-30" width="15" height="15"/>
     </resources>
 </document>

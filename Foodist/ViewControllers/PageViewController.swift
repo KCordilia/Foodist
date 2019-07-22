@@ -60,14 +60,8 @@ class PageViewController: UIPageViewController {
                 
             }
           }
-      
-        
-        setUpPageControl()
-      
-        
-        
+      setUpPageControl()
     }
-   
 }
 
 extension PageViewController: UIPageViewControllerDataSource,UIPageViewControllerDelegate {
