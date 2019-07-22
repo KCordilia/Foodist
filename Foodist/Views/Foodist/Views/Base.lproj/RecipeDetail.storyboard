@@ -213,7 +213,6 @@
                                             <action selector="play:" destination="vMz-cz-v5q" eventType="touchUpInside" id="ERQ-KO-byw"/>
                                         </connections>
                                     </button>
-<<<<<<< HEAD
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKK-Kv-H8m">
                                         <rect key="frame" x="196" y="0.0" width="17.666666666666657" height="40"/>
                                         <state key="normal" image="Navigation_Stop_2x"/>
@@ -221,14 +220,9 @@
                                             <action selector="stop:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="4dc-Gy-LBq"/>
                                             <action selector="stop:" destination="vMz-cz-v5q" eventType="touchUpInside" id="clo-bK-IXJ"/>
                                         </connections>
-=======
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKK-Kv-H8m">
-                                        <rect key="frame" x="161.66666666666666" y="0.0" width="72.666666666666657" height="40"/>
-                                        <state key="normal" image="icons8-stop-30"/>
->>>>>>> 926de064dad42e7277dca87beb4c818440e88e3a
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ty-mk-JhI">
-                                        <rect key="frame" x="242.33333333333329" y="0.0" width="72.666666666666657" height="40"/>
+                                        <rect key="frame" x="291" y="0.0" width="24" height="40"/>
                                         <state key="normal" image="Navigation_FastForward_2x"/>
                                         <connections>
                                             <action selector="next:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="4FH-4X-x5F"/>
