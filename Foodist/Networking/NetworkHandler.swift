@@ -40,7 +40,7 @@ enum NetworkError: Error {
 struct NetworkHandler {
     var APIKey: String!
     var hostHeader: String!
-    
+
    mutating func setUpHeaders() {
         APIKey = "6d4b0c4e3bmsh16b8d0615ae873bp1510ccjsnc4cc6ac1e186"
         hostHeader = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
