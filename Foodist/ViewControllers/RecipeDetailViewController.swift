@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class RecipeDetailViewController: UIViewController {
-    
+
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -21,7 +21,7 @@ class RecipeDetailViewController: UIViewController {
     var recipe: Recipe?
     var instruction: [RecipeInstructions]?
     let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard
@@ -31,7 +31,7 @@ class RecipeDetailViewController: UIViewController {
         let instructionsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/analyzedInstructions"
         var networkHandler = NetworkHandler()
         networkHandler.setUpHeaders()
-        networkHandler.getAPIData(ingredientsEndpoint) { (result: Result<RecipeIngredient,NetworkError>) in
+        networkHandler.getAPIData(ingredientsEndpoint) { (result: Result<RecipeIngredient, NetworkError>) in
             if case .failure(let error) = result {
                 print(error)
             }
@@ -42,12 +42,12 @@ class RecipeDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 if let ingredient = self.ingredient {
                     self.loadIngredients(ingredient)
-                   self.tableView.reloadData()
+                    self.tableView.reloadData()
                 }
             }
         }
-        
-        networkHandler.getAPIData(instructionsEndpoint) { (result: Result<[RecipeInstructions],NetworkError>) in
+
+        networkHandler.getAPIData(instructionsEndpoint) { (result: Result<[RecipeInstructions], NetworkError>) in
             if case .failure(let error) = result {
                 print(error)
             }
@@ -64,7 +64,7 @@ class RecipeDetailViewController: UIViewController {
         }
         loadRecipe(recipe)
     }
-    
+
     func loadRecipe(_ recipe: Recipe) {
         recipeTitle.text = recipe.title
         let recipeImageUrl = recipeImageEndpoint + recipe.image
@@ -74,13 +74,13 @@ class RecipeDetailViewController: UIViewController {
         }
         cookingTimeLabel.text = "\(cookingTime)"
     }
-    
+
     func loadIngredients(_ ingredient: RecipeIngredient) {
         ingredient.ingredients.forEach { ingredient in
             ingredientList.append(SingleIngredient(name: ingredient.name, value: ingredient.amount.metric.value, unit: ingredient.amount.metric.unit))
         }
     }
-    
+
     func loadInstructions(_ instruction: [RecipeInstructions]) {
         instruction.forEach { instruction in
             instruction.steps.forEach({ steps in
@@ -88,15 +88,15 @@ class RecipeDetailViewController: UIViewController {
             })
         }
     }
-    
+
 }
 
 extension RecipeDetailViewController: UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "Ingredients"
@@ -111,7 +111,7 @@ extension RecipeDetailViewController: UITableViewDataSource {
             return instructionList.count
         }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let ingredientCell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)

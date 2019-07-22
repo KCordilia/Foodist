@@ -20,7 +20,7 @@ class PageViewController: UIPageViewController {
         appearance.pageIndicatorTintColor = .yellow
         appearance.currentPageIndicatorTintColor = .red
     }
-    
+
     func instantiateViewController() -> SelectedCatagoryViewController {
         guard
             let selectedCategoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selectedCatagoryVC") as? SelectedCatagoryViewController
@@ -50,7 +50,7 @@ class PageViewController: UIPageViewController {
 
         var networkHandler = NetworkHandler()
         networkHandler.setUpHeaders()
-        networkHandler.getAPIData(endPoint) { (result: Result<RecipeList,NetworkError>) in
+        networkHandler.getAPIData(endPoint) { (result: Result<RecipeList, NetworkError>) in
             if case .failure(let error) = result {
                 print(error)
             }
