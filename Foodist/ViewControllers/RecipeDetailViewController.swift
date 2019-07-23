@@ -21,7 +21,7 @@ class RecipeDetailViewController: UIViewController {
     var recipe: Recipe?
     var instruction: [RecipeInstructions]?
     let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
-    var speakDelegate: Speakable?
+    weak var speakDelegate: Speakable?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,15 +86,10 @@ class RecipeDetailViewController: UIViewController {
         instruction.forEach { instruction in
             instruction.steps.forEach({ steps in
                 instructionList.append(steps)
-                //speakDelegate = SpeechViewController()
-               // speakDelegate?.delegate = self
-                speakDelegate?.setUpTextToSpeak(instructionList[0].step)
-//                let speechViewController = SpeechViewController()
-//                speechViewController.sourceVc = self
-//                speechViewController.recieveTextToSpeak(instructionList[0].step)
-
+                 speakDelegate?.setUpTextToSpeak(steps.step)
             })
         }
+
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSpeech" {
@@ -102,7 +97,6 @@ class RecipeDetailViewController: UIViewController {
             self.speakDelegate = destinationVC
         }
     }
-
 }
 
 extension RecipeDetailViewController: UITableViewDataSource {
