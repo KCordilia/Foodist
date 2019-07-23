@@ -134,5 +134,4 @@ extension RecipeDetailViewController: UITableViewDataSource {
             return instructionCell
         }
     }
-
 }

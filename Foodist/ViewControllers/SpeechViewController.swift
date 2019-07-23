@@ -78,7 +78,7 @@ class SpeechViewController: UIViewController {
             setAvailabiltyForControls()
             playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
             do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .allowBluetooth)
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
                 try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
             } catch {
                 print("audioSession properties weren't set because of an error.")
@@ -126,7 +126,6 @@ class SpeechViewController: UIViewController {
 
     func setAvailabiltyForControls() {
         if currentState == .playing {
-//            previousButton.isEnabled = true
             nextButton.isEnabled = true
         } else {
             previousButton.isEnabled = false
@@ -146,7 +145,6 @@ class SpeechViewController: UIViewController {
 extension SpeechViewController: Speakable {
     func setUpTextToSpeak(_ text: String) {
         recipeInstructions.append(text)
-        print(recipeInstructions)
         playButtonImage.isEnabled = true
     }
 }
