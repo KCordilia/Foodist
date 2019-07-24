@@ -25,7 +25,6 @@ class SpeechViewController: UIViewController {
     var sourceVC: RecipeDetailViewController?
     var spokenTextLengths = 0
     var currentUtterance = 0
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()

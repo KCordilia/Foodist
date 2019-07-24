@@ -8,9 +8,6 @@
 
 import Foundation
 
-protocol Preference {
-    
-}
 enum SearchParams {
     case type
     case cuisine

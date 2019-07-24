@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ShowPreference {
-    var preferences: [Preference] { get set } 
+    var preferences: [Preference] { get set }
 }
 struct Preference {
     let catagory: String
