@@ -9,7 +9,7 @@
 import Foundation
 
 protocol ShowPreference {
-    var preferences: [Preference] { get set } 
+    var preferences: [Preference] { get set }
 }
 struct Preference {
     let catagory: String
@@ -34,7 +34,7 @@ struct Preference {
         let spanish = PreferenceOption(name: "spanish", displayTitle: "Spanish")
         let middleEastern = PreferenceOption(name: "middle+eastern", displayTitle: "Middle Eastern")
 
-        let cuisinePreference = Preference(catagory: "cuisine", displayTitle: "cuisine", options: [irish, spanish, french, italian, mexican, middleEastern])
+        let cuisinePreference = Preference(catagory: "cuisine", displayTitle: "Cuisine", options: [irish, spanish, french, italian, mexican, middleEastern])
 
         let dairy = PreferenceOption(name: "dairy", displayTitle: "Dairy")
         let egg = PreferenceOption(name: "egg", displayTitle: "Egg")

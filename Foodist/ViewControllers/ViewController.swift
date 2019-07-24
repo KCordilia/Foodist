@@ -17,9 +17,10 @@ class ViewController: UIViewController, ShowPreference {
         setUpNavigationBar()
         let mainCourse = PreferenceOption(name: "main+course", displayTitle: "Main course")
         let dessert = PreferenceOption(name: "dessert", displayTitle: "Dessert")
-        let fakePreference = Preference(catagory: "type", displayTitle: "Food Type", options: [mainCourse,dessert])
+        let fakePreference = Preference(catagory: "type", displayTitle: "Food Type", options: [mainCourse, dessert])
         preferences.append(fakePreference)
         preferences.shuffle()
+        print(self.children)
     }
 
     func setUpNavigationBar() {

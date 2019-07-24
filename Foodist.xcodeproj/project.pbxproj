@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06380AC522E5A811005B635F /* NetworkEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380AC422E5A811005B635F /* NetworkEndpoints.swift */; };
 		06380ACC22E72E91005B635F /* PreferenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380ACB22E72E91005B635F /* PreferenceTableViewController.swift */; };
 		06380ACE22E72F0D005B635F /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380ACD22E72F0D005B635F /* OptionsTableViewCell.swift */; };
 		06380AD022E739C9005B635F /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380ACF22E739C9005B635F /* Preference.swift */; };
@@ -35,7 +34,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		06380AC422E5A811005B635F /* NetworkEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndpoints.swift; sourceTree = "<group>"; };
 		06380ACB22E72E91005B635F /* PreferenceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceTableViewController.swift; sourceTree = "<group>"; };
 		06380ACD22E72F0D005B635F /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
 		06380ACF22E739C9005B635F /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
@@ -120,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				06C0A3AB22E0CBD800120DE1 /* NetworkHandler.swift */,
-				06380AC422E5A811005B635F /* NetworkEndpoints.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -352,7 +349,6 @@
 				8AE7BBDE22E07A6E00AD88BF /* IngredientCell.swift in Sources */,
 				8A36179622DF600B0050790D /* Recipe.swift in Sources */,
 				06C0A3A222E0B0A500120DE1 /* PageViewController.swift in Sources */,
-				06380AC522E5A811005B635F /* NetworkEndpoints.swift in Sources */,
 				8AE7BBE222E1F49900AD88BF /* SpeechViewController.swift in Sources */,
 				8A8EE1D722E0523B00887926 /* RecipeInstructions.swift in Sources */,
 				06C0A3AC22E0CBD800120DE1 /* NetworkHandler.swift in Sources */,

@@ -17,13 +17,15 @@ class AllCatagoriesViewController: ViewController {
     let cellIdentifier = "allCatagoryTCell"
     let collectionViewcellIdentifier = "allcatagoryCCell"
     let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
-    var catagories: [Category]?
+    var catagories: [Category] = []
     var selectedRecipe: Recipe?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.separatorStyle = .none
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
         loadUrls()
     }
 
@@ -55,7 +57,8 @@ class AllCatagoriesViewController: ViewController {
                     else { return }
                 recipeList = value
                 if let recipeList = recipeList {
-                    self.catagories?.append(Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: false))
+                    let catagory = Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: true)
+                    self.catagories.append(catagory)
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                     }
@@ -89,19 +92,18 @@ class AllCatagoriesViewController: ViewController {
 
 extension AllCatagoriesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return catagories?.count ?? 0
+        return catagories.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AllCatagoriesTableViewCell
             else { preconditionFailure("deque cell failed in selected allcatagory table view ") }
-        if let catagory = catagories?[indexPath.row] {
+         let catagory = catagories[indexPath.row]
             cell.catagoryName.text = catagory.name
             cell.collectionView.dataSource = self
             cell.collectionView.delegate = self
             cell.collectionView.reloadData()
             cell.collectionView.tag = indexPath.item
-        }
         return cell
     }
 
@@ -113,25 +115,22 @@ extension AllCatagoriesViewController: UITableViewDataSource, UITableViewDelegat
 extension AllCatagoriesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let catagory = catagories?[collectionView.tag] {
+         let catagory = catagories[collectionView.tag]
             let recipies = catagory.recipes
             return recipies.count
-        }
-        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewcellIdentifier, for: indexPath) as? AllCatagoryCollectionViewCell
             else { preconditionFailure("deque cell failed in selected catagory collection view ") }
 
-        if let catagory = catagories?[collectionView.tag] {
+         let catagory = catagories[collectionView.tag]
             let recipe = catagory.recipes[indexPath.item]
             cell.recipeName.text = recipe.title
             let imageUrl = recipeImageEndpoint + recipe.image
             if let url = URL(string: imageUrl) {
                 cell.recipeImage.kf.setImage(with: url)
             }
-        }
         return cell
     }
 
@@ -142,10 +141,9 @@ extension AllCatagoriesViewController: UICollectionViewDataSource, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let catagory = catagories?[collectionView.tag] {
+            let catagory = catagories[collectionView.tag]
             let recipe = catagory.recipes[indexPath.item]
             selectedRecipe = recipe
             performSegue(withIdentifier: "showDetail", sender: self)
-        }
     }
 }

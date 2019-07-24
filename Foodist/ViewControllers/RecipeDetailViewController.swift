@@ -113,7 +113,6 @@ class RecipeDetailViewController: UIViewController {
         if segue.identifier == "showSpeech" {
             guard let destinationVC = segue.destination as? SpeechViewController else { return }
             self.speakDelegate = destinationVC
-            
         }
     }
 
