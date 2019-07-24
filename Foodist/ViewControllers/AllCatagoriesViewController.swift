@@ -26,7 +26,7 @@ class AllCatagoriesViewController: ViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        loadUrls()
+       // loadUrls()
     }
 
     func loadUrls() {
