@@ -9,7 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController, ShowPreference {
-
     var preferences: [Preference] = []
     var pageViewPreference: String = "dessert"
     
@@ -39,18 +38,15 @@ class ViewController: UIViewController, ShowPreference {
             do {
                let savedPreference = try decoder.decode([Preference].self, from: savedPreference)
                 preferences = savedPreference
-            }
-            catch let error {
+            } catch let error {
                 print(error)
             }
-        }
-
-        else {
+        } else {
             let mainCourse = PreferenceOption(name: "main+course", displayTitle: "Main course")
             let dessert = PreferenceOption(name: "dessert", displayTitle: "Dessert")
             let italian = PreferenceOption(name: "italian", displayTitle: "Italian")
             let breakfast = PreferenceOption(name: "breakfast", displayTitle: "Breakfast")
-            let defaultPreference = Preference(catagory: "type", displayTitle: "Food Type", options: [mainCourse, dessert,italian,breakfast])
+            let defaultPreference = Preference(catagory: "type", displayTitle: "Food Type", options: [mainCourse, dessert, italian, breakfast])
             preferences.append(defaultPreference)
         }
     }
