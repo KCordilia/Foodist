@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		06380AC522E5A811005B635F /* NetworkEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380AC422E5A811005B635F /* NetworkEndpoints.swift */; };
+		06380ACC22E72E91005B635F /* PreferenceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380ACB22E72E91005B635F /* PreferenceTableViewController.swift */; };
+		06380ACE22E72F0D005B635F /* OptionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380ACD22E72F0D005B635F /* OptionsTableViewCell.swift */; };
+		06380AD022E739C9005B635F /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06380ACF22E739C9005B635F /* Preference.swift */; };
 		06424A0E22DF5C2100DD93A9 /* RecipeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06424A0C22DF5C2100DD93A9 /* RecipeDetail.storyboard */; };
 		06C0A3A222E0B0A500120DE1 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C0A3A122E0B0A500120DE1 /* PageViewController.swift */; };
 		06C0A3A422E0B12500120DE1 /* SelectedCatagoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C0A3A322E0B12500120DE1 /* SelectedCatagoryViewController.swift */; };
@@ -33,6 +36,9 @@
 
 /* Begin PBXFileReference section */
 		06380AC422E5A811005B635F /* NetworkEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkEndpoints.swift; sourceTree = "<group>"; };
+		06380ACB22E72E91005B635F /* PreferenceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceTableViewController.swift; sourceTree = "<group>"; };
+		06380ACD22E72F0D005B635F /* OptionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsTableViewCell.swift; sourceTree = "<group>"; };
+		06380ACF22E739C9005B635F /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 		06424A0D22DF5C2100DD93A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Foodist/Views/Base.lproj/RecipeDetail.storyboard; sourceTree = "<group>"; };
 		06C0A3A122E0B0A500120DE1 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		06C0A3A322E0B12500120DE1 /* SelectedCatagoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedCatagoryViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 				8A36179522DF600B0050790D /* Recipe.swift */,
 				8A8EE1D622E0523B00887926 /* RecipeInstructions.swift */,
 				8A8EE1DA22E05B4100887926 /* Ingredients.swift */,
+				06380ACF22E739C9005B635F /* Preference.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -161,6 +168,7 @@
 				06C0A3A322E0B12500120DE1 /* SelectedCatagoryViewController.swift */,
 				8A8EE1DE22E061B400887926 /* RecipeDetailViewController.swift */,
 				8AE7BBE122E1F49900AD88BF /* SpeechViewController.swift */,
+				06380ACB22E72E91005B635F /* PreferenceTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -190,6 +198,7 @@
 				06C0A3A522E0B20800120DE1 /* AllCatagoriesTableViewCell.swift */,
 				8AE7BBDD22E07A6E00AD88BF /* IngredientCell.swift */,
 				06C0A3A722E0B21100120DE1 /* AllCatagoryCollectionViewCell.swift */,
+				06380ACD22E72F0D005B635F /* OptionsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -336,6 +345,9 @@
 				06C0A3AA22E0B24000120DE1 /* AllCatagoriesViewController.swift in Sources */,
 				06C0A3A822E0B21100120DE1 /* AllCatagoryCollectionViewCell.swift in Sources */,
 				06C0A3A422E0B12500120DE1 /* SelectedCatagoryViewController.swift in Sources */,
+				06380ACC22E72E91005B635F /* PreferenceTableViewController.swift in Sources */,
+				06380ACE22E72F0D005B635F /* OptionsTableViewCell.swift in Sources */,
+				06380AD022E739C9005B635F /* Preference.swift in Sources */,
 				8A8EE1DF22E061B400887926 /* RecipeDetailViewController.swift in Sources */,
 				8AE7BBDE22E07A6E00AD88BF /* IngredientCell.swift in Sources */,
 				8A36179622DF600B0050790D /* Recipe.swift in Sources */,

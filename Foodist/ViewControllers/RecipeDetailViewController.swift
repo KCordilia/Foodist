@@ -33,7 +33,10 @@ class RecipeDetailViewController: UIViewController {
         networkHandler.setUpHeaders()
         networkHandler.getAPIData(ingredientsEndpoint) { (result: Result<RecipeIngredient, NetworkError>) in
             if case .failure(let error) = result {
-                print(error)
+                switch error {
+                case .networkError(let message):
+                    self.showAlert(message)
+                }
             }
             guard
                 case .success(let value) = result
@@ -49,7 +52,10 @@ class RecipeDetailViewController: UIViewController {
 
         networkHandler.getAPIData(instructionsEndpoint) { (result: Result<[RecipeInstructions], NetworkError>) in
             if case .failure(let error) = result {
-                print(error)
+                switch error {
+                case .networkError(let message):
+                    self.showAlert(message)
+                }
             }
             guard
                 case .success(let value) = result
@@ -63,6 +69,13 @@ class RecipeDetailViewController: UIViewController {
             }
         }
         loadRecipe(recipe)
+    }
+
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
 
     func loadRecipe(_ recipe: Recipe) {

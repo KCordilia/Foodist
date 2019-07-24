@@ -10,7 +10,7 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-    let favouriteCatagory = "dessert"
+    var favouriteCatagory = "dessert"
     var endPoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type="
     let numberOfPages = 5
     var recipeList: RecipeList?
@@ -41,18 +41,25 @@ class PageViewController: UIPageViewController {
                            completion: nil)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource = self
-        delegate = self
-
+    func loadUrl() {
+        if let parent = self.parent as? ViewController {
+            let typePreference = parent.preferences.filter { $0.catagory == "type" }
+            if let randomOption = typePreference.first?.options.randomElement() {
+                favouriteCatagory = randomOption.name
+                print(randomOption.name)
+                parent.pageViewPreference = favouriteCatagory
+            }
+        }
         endPoint += favouriteCatagory + "&number=\(numberOfPages)"
 
         var networkHandler = NetworkHandler()
         networkHandler.setUpHeaders()
         networkHandler.getAPIData(endPoint) { (result: Result<RecipeList, NetworkError>) in
             if case .failure(let error) = result {
-                print(error)
+                switch error {
+                case .networkError(let message):
+                    self.showAlert(message)
+                }
             }
             guard
                 case .success(let value) = result
@@ -61,10 +68,24 @@ class PageViewController: UIPageViewController {
             if self.recipeList != nil {
                 DispatchQueue.main.async {
                     self.setUpInitialPage()
+                    self.setUpPageControl()
                 }
             }
         }
-        setUpPageControl()
+    }
+
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataSource = self
+        delegate = self
+        loadUrl()
     }
 }
 

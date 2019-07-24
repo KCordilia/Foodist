@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllCatagoriesViewController: UIViewController {
+class AllCatagoriesViewController: ViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -24,29 +24,53 @@ class AllCatagoriesViewController: UIViewController {
         super.viewDidLoad()
 
         tableView.separatorStyle = .none
+        loadUrls()
+    }
 
+    func loadUrls() {
         //load catagory. find catagories and attach it to Url and pass the url to networking function. for now default catagory is main+course.
-        let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=main+course"
-        var recipeList: RecipeList?
-        var networkHandler = NetworkHandler()
-        networkHandler.setUpHeaders()
-        networkHandler.getAPIData(urlString) { (result: Result<RecipeList, NetworkError>) in
-            if case .failure(let error) = result {
-                print(error)
+       // catagories =
+       // let excludeItem =
+        if let parent = self.parent as? ViewController {
+            let otherCatagories = parent.preferences.map { (element) -> [PreferenceOption] in
+                return element.options
             }
-            guard
-                case .success(let value) = result
-                else { return }
-            recipeList = value
-            if let recipeList = recipeList {
-                self.catagories = [Category(name: "Main Course", recipes: recipeList.results, isUserPreference: false)]
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
+            let concatinated = Array(otherCatagories.joined())
+            for index in 0..<concatinated.count {
+            let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=\(concatinated[index].name)"
+            var recipeList: RecipeList?
+            var networkHandler = NetworkHandler()
+            networkHandler.setUpHeaders()
+            networkHandler.getAPIData(urlString) { (result: Result<RecipeList, NetworkError>) in
+                if case .failure(let error) = result {
+                    switch error {
+                    case .networkError(let message):
+                        self.showAlert(message)
+                    }
+                }
+                guard
+                    case .success(let value) = result
+                    else { return }
+                recipeList = value
+                if let recipeList = recipeList {
+                    self.catagories?.append(Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: false))
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
             }
         }
+
     }
 
+}
+
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

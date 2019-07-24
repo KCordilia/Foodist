@@ -9,8 +9,7 @@
 import Foundation
 
 enum NetworkError: Error {
-    case tooSlow
-    case serverDown
+    case networkError(String)
 }
 
 struct NetworkHandler {
@@ -45,8 +44,8 @@ struct NetworkHandler {
                     completion(.success(value))
                 }
             } else {
-                print(error!)
-                completion(.failure(.serverDown))
+                guard let error = error else { return }
+                completion(.failure(.networkError(error.localizedDescription)))
             }
 
         }

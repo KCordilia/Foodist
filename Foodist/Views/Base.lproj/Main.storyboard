@@ -45,11 +45,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Foodist" id="EuY-Rx-pfj">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" image="settings" id="mRA-rR-nbf">
-                            <inset key="imageInsets" minX="-129" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Foodist" id="EuY-Rx-pfj"/>
+                    <connections>
+                        <segue destination="gKB-A2-rKe" kind="show" identifier="showPreference" id="Wp0-oy-Fb9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -265,10 +264,52 @@
             </objects>
             <point key="canvasLocation" x="1473.913043478261" y="91.741071428571431"/>
         </scene>
+        <!--Preference Table View Controller-->
+        <scene sceneID="Vsv-nJ-4Dx">
+            <objects>
+                <tableViewController id="gKB-A2-rKe" customClass="PreferenceTableViewController" customModule="Foodist" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wq0-Qd-AEu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="rowCell" rowHeight="62" id="b2V-ZV-mmg" customClass="OptionsTableViewCell" customModule="Foodist" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="62"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b2V-ZV-mmg" id="ltr-oo-ReX">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="61.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcs-nd-WwT">
+                                            <rect key="frame" x="20" y="11" width="42" height="40"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Fcs-nd-WwT" secondAttribute="trailing" id="PHn-Yj-mHN"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Fcs-nd-WwT" secondAttribute="bottom" id="a13-zG-UN9"/>
+                                        <constraint firstItem="Fcs-nd-WwT" firstAttribute="leading" secondItem="ltr-oo-ReX" secondAttribute="leadingMargin" id="aRJ-jy-jm4"/>
+                                        <constraint firstItem="Fcs-nd-WwT" firstAttribute="top" secondItem="ltr-oo-ReX" secondAttribute="topMargin" id="qD7-hA-i0e"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="optionLabel" destination="Fcs-nd-WwT" id="4f6-IA-sgR"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gKB-A2-rKe" id="69U-1B-P9f"/>
+                            <outlet property="delegate" destination="gKB-A2-rKe" id="ubx-A3-jL4"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y8l-uo-8ZV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="400" y="-1235"/>
+        </scene>
     </scenes>
-    <resources>
-        <image name="settings" width="800" height="800"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TAS-yo-2Vb"/>
     </inferredMetricsTieBreakers>
