@@ -22,6 +22,10 @@ class SpeechViewController: UIViewController {
     var recipeInstructions: [String] = []
     var currentState: State = .stopped
     var currentIndex = 0
+    var sourceVC: RecipeDetailViewController?
+    var spokenTextLengths = 0
+    var currentUtterance = 0
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,5 +150,49 @@ extension SpeechViewController: Speakable {
     func setUpTextToSpeak(_ text: String) {
         recipeInstructions.append(text)
         playButtonImage.isEnabled = true
+    }
+}
+
+extension SpeechViewController: AVSpeechSynthesizerDelegate {
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        // Determine the current range in the whole text (all utterances), not just the current one.
+        let rangeInTotalText = NSMakeRange(spokenTextLengths + characterRange.location, characterRange.length)
+
+        // Select the specified range in the textfield.
+        tvEditor.selectedRange = rangeInTotalText
+
+        // Store temporarily the current font attribute of the selected text.
+        let currentAttributes = tvEditor.attributedText.attributes(at: rangeInTotalText.location, effectiveRange: nil)
+        let fontAttribute: AnyObject? = currentAttributes[NSAttributedString.Key.font] as AnyObject?
+
+        // Assign the selected text to a mutable attributed string.
+        let attributedString = NSMutableAttributedString(string: tvEditor.attributedText.attributedSubstring(from: rangeInTotalText).string)
+
+        // Make the text of the selected area orange by specifying a new attribute.
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.orange, range: NSMakeRange(0, attributedString.length))
+
+        // Make sure that the text will keep the original font by setting it as an attribute.
+        attributedString.addAttribute(NSAttributedString.Key.font, value: fontAttribute!, range: NSMakeRange(0, attributedString.string.utf16.count))
+
+        // In case the selected word is not visible scroll a bit to fix this.
+        tvEditor.scrollRangeToVisible(rangeInTotalText)
+
+        // Begin editing the text storage.
+        tvEditor.textStorage.beginEditing()
+
+        // Replace the selected text with the new one having the orange color attribute.
+        tvEditor.textStorage.replaceCharacters(in: rangeInTotalText, with: attributedString)
+
+
+        let indexPath = IndexPath(row: 0, section: 1)
+        sourceVC?.highlightWord(recipeInstructions[currentIndex], indexPath: indexPath)
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        spokenTextLengths = spokenTextLengths + utterance.speechString.utf16.count + 1
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        currentUtterance = currentUtterance + 1
     }
 }
