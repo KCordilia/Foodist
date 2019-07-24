@@ -37,7 +37,9 @@ class RecipeDetailViewController: UIViewController {
             if case .failure(let error) = result {
                 switch error {
                 case .networkError(let message):
-                    self.showAlert(message)
+                    DispatchQueue.main.async {
+                        self.showAlert(message)
+                    }
                 }
             }
             guard
@@ -56,7 +58,9 @@ class RecipeDetailViewController: UIViewController {
             if case .failure(let error) = result {
                 switch error {
                 case .networkError(let message):
-                    self.showAlert(message)
+                    DispatchQueue.main.async {
+                        self.showAlert(message)
+                    }
                 }
             }
             guard
@@ -113,7 +117,7 @@ class RecipeDetailViewController: UIViewController {
         }
     }
 
-    func highlightWord(_ text: String, indexPath: IndexPath, characterRange: NSRange,spokenTextLengths: Int) {
+   /* func highlightWord(_ text: String, indexPath: IndexPath, characterRange: NSRange,spokenTextLengths: Int) {
         guard
             let instructionCell = tableView.cellForRow(at: indexPath) as? InstructionCell
             else { return }
@@ -176,7 +180,7 @@ class RecipeDetailViewController: UIViewController {
         instructionCell.instructionLabel.attributedText = attributedString
 
 
-    }
+    }*/
 }
 
 extension RecipeDetailViewController: UITableViewDataSource {

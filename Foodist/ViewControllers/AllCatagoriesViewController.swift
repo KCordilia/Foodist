@@ -45,7 +45,9 @@ class AllCatagoriesViewController: ViewController {
                 if case .failure(let error) = result {
                     switch error {
                     case .networkError(let message):
-                        self.showAlert(message)
+                        DispatchQueue.main.async {
+                            self.showAlert(message)
+                        }
                     }
                 }
                 guard

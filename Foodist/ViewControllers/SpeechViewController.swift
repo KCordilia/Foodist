@@ -154,7 +154,7 @@ extension SpeechViewController: Speakable {
 }
 
 extension SpeechViewController: AVSpeechSynthesizerDelegate {
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+   /* func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         // Determine the current range in the whole text (all utterances), not just the current one.
         let rangeInTotalText = NSMakeRange(spokenTextLengths + characterRange.location, characterRange.length)
 
@@ -186,13 +186,13 @@ extension SpeechViewController: AVSpeechSynthesizerDelegate {
 
         let indexPath = IndexPath(row: 0, section: 1)
         sourceVC?.highlightWord(recipeInstructions[currentIndex], indexPath: indexPath)
-    }
+    }*/
 
-    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+  /*  func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         spokenTextLengths = spokenTextLengths + utterance.speechString.utf16.count + 1
     }
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
         currentUtterance = currentUtterance + 1
-    }
+    }*/
 }
