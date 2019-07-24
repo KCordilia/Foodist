@@ -15,6 +15,16 @@ class PageViewController: UIPageViewController {
     let numberOfPages = 5
     var recipeList: RecipeList?
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        dataSource = self
+        delegate = self
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        loadUrl()
+    }
+
     fileprivate func setUpPageControl() {
         let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
         appearance.pageIndicatorTintColor = .yellow
@@ -25,7 +35,6 @@ class PageViewController: UIPageViewController {
         guard
             let selectedCategoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selectedCatagoryVC") as? SelectedCatagoryViewController
             else { preconditionFailure("unexpected viewcontroller") }
-
             return selectedCategoryVC
     }
 
@@ -81,16 +90,6 @@ class PageViewController: UIPageViewController {
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dataSource = self
-        delegate = self
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        loadUrl()
     }
 }
 

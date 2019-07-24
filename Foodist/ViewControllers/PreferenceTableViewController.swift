@@ -10,8 +10,13 @@ import UIKit
 
 class PreferenceTableViewController: UITableViewController {
 
+    // MARK: - properties
+    let headerHeight: CGFloat = 60
+    let rowHeight: CGFloat = 45
+    let cellIdentifier = "rowCell"
+    let headerIdentifier = "preferenceHeaderView"
     var preferences: [Preference] = []
-    var isSectionExpanded: [Bool] = []
+    var needToExpand: [Bool] = [true, true, true, true]
     var userPreferences: [Preference] = []
     var preferenceDelegate: ShowPreference?
     override func viewDidLoad() {
@@ -21,15 +26,20 @@ class PreferenceTableViewController: UITableViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        if !userPreferences.isEmpty {
+            savePreference()
+        }
         preferenceDelegate?.preferences = preferences
-    }
+}
 
     func setUpModel() {
         preferences = Preference.getAllPreferenceOptions()
-        isSectionExpanded = Array(repeating: true, count: preferences.count)
+        //needToExpand = Array(repeating: true, count: preferences.count)
     }
 
     func setUpTable() {
+        let headerNib = UINib.init(nibName: "PreferenceHeaderView", bundle: Bundle.main)
+        tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: headerIdentifier)
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
     }
@@ -65,20 +75,17 @@ class PreferenceTableViewController: UITableViewController {
     }
 
     func savePreference() {
-
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(userPreferences) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "UserPreference")
+        }
     }
 
-    @objc func sectionTapped(sender: UITapGestureRecognizer) {
-        // print(sender.view?.tag)
-        let section = (sender.view?.tag)!
-        let preference = preferences[section]
-        let options = preference.options
-        var indexPaths: [IndexPath] = []
-        for index in 0..<options.count {
-            indexPaths.append(IndexPath(row: index, section: section))
-        }
-        isSectionExpanded[section] = !isSectionExpanded[section]
-        tableView.reloadRows(at: indexPaths, with: .automatic)
+    @objc func sectionTapped(sender: UIButton) {
+            let section = sender.tag
+            needToExpand[section] = !needToExpand[section]
+            tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
 
     // MARK: - Table view data source
@@ -89,41 +96,40 @@ class PreferenceTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return preferences[section].options.count
+        if needToExpand[section] {
+            return 0
+        } else {
+            return preferences[section].options.count
+        }
+
     }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 40))
-        let label = UILabel(frame: CGRect(x: 20, y: 0, width: tableView.frame.width-40, height: 40))
-        headerView.addSubview(label)
-        label.text = preferences[section].displayTitle
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(sectionTapped(sender:)))
-        headerView.addGestureRecognizer(gesture)
-        label.backgroundColor = .lightGray
-        headerView.tag = section
-        //        headerView.layer.shadowColor = UIColor.lightGray.cgColor
-        //        headerView.layer.shadowOpacity = 1
-        //        headerView.layer.shadowOffset = .zero
-        //        headerView.layer.shadowRadius = 10
+        guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerIdentifier) as? PreferenceHeaderView else { preconditionFailure("header view is not available") }
+        headerView.catagoryLabel.text = preferences[section].displayTitle
+        headerView.button.tag = section
+        headerView.button.addTarget(self, action: #selector(sectionTapped(sender:)), for: .touchUpInside)
+        if needToExpand[section] {
+            headerView.button.setImage(UIImage(named: "down"), for: .normal)
+            headerView.separatorView.backgroundColor = .black
+        } else {
+            headerView.button.setImage(UIImage(named: "up"), for: .normal)
+            headerView.separatorView.backgroundColor = .white
+        }
         return headerView
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return headerHeight
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if isSectionExpanded[indexPath.section] {
-            return 0
-        } else {
-            return 45
-        }
+            return rowHeight
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "rowCell", for: indexPath) as? OptionsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OptionsTableViewCell else {
             preconditionFailure("section cell not available")
         }
         cell.optionLabel.text = preferences[indexPath.section].options[indexPath.row].displayTitle
