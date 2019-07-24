@@ -3,3 +3,8 @@ excluded:
 line_length:
  warning: 200
  ignores_comments: true
+ identifier_name:
+ excluded: # excluded via string array
+   - id
+
+// swiftlint:disable:next identifier_name
