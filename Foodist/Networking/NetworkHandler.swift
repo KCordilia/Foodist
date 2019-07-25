@@ -13,15 +13,10 @@ enum NetworkError: Error {
 }
 
 struct NetworkHandler {
-    var APIKey: String!
-    var hostHeader: String!
-
-    mutating func setUpHeaders() {
-        APIKey = "6d4b0c4e3bmsh16b8d0615ae873bp1510ccjsnc4cc6ac1e186"
-        hostHeader = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
-    }
 
     func getAPIData<T: Codable>(_ url: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        let APIKey = "6d4b0c4e3bmsh16b8d0615ae873bp1510ccjsnc4cc6ac1e186"
+        let hostHeader = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
         let session = URLSession.shared
         guard
             let url = URL(string: url)
@@ -35,13 +30,12 @@ struct NetworkHandler {
 
                     let result: Result<T, Error> = self.decode(data: data)
 
-                    if case .failure(let error) = result {
+                    switch result {
+                    case .failure(let error):
                         print(error)
+                    case .success(let value):
+                        completion(.success(value))
                     }
-                    guard
-                        case .success(let value) = result
-                        else { return }
-                    completion(.success(value))
                 }
             } else {
                 guard let error = error else { return }

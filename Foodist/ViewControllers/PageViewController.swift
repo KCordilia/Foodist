@@ -14,6 +14,9 @@ class PageViewController: UIPageViewController {
     var endPoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type="
     let numberOfPages = 5
     var recipeList: RecipeList?
+    //var recipeMoreInfo: [Recipe]?
+
+    //TODO: - remove recipes without instructionlist
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,7 @@ class PageViewController: UIPageViewController {
     }
 
     func loadUrl() {
-        if let parent = self.parent as? ViewController {
+        if let parent = self.parent as? BaseViewController {
             let typePreference = parent.preferences.filter { $0.catagory == "type" }
             if let randomOption = typePreference.first?.options.randomElement() {
                 favouriteCatagory = randomOption.name
@@ -61,8 +64,7 @@ class PageViewController: UIPageViewController {
         }
         endPoint += favouriteCatagory + "&number=\(numberOfPages)"
 
-        var networkHandler = NetworkHandler()
-        networkHandler.setUpHeaders()
+        let networkHandler = NetworkHandler()
         networkHandler.getAPIData(endPoint) { (result: Result<RecipeList, NetworkError>) in
             if case .failure(let error) = result {
                 switch error {

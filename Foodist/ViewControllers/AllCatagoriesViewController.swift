@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllCatagoriesViewController: ViewController {
+class AllCatagoriesViewController: BaseViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -33,8 +33,11 @@ class AllCatagoriesViewController: ViewController {
     }
 
     func loadUrls() {
-        if let parent = self.parent as? ViewController {
-            let otherCatagories = parent.preferences.map { (element) -> [PreferenceOption] in
+        if let parent = self.parent as? BaseViewController {
+            let allPreferences = parent.preferences
+          //  let searchParameters = allPreferences.filter { $0.catagory == "intolerances" || $0.catagory == "diet" }
+            //allPreferences.re
+            let otherCatagories = allPreferences.map { (element) -> [PreferenceOption] in
                 return element.options
             }
             var concatinated = Array(otherCatagories.joined())
@@ -42,25 +45,28 @@ class AllCatagoriesViewController: ViewController {
             for index in 0..<concatinated.count {
             let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=\(concatinated[index].name)"
             var recipeList: RecipeList?
-            var networkHandler = NetworkHandler()
-            networkHandler.setUpHeaders()
+            let networkHandler = NetworkHandler()
             dispatchGroup.enter()
             networkHandler.getAPIData(urlString) { (result: Result<RecipeList, NetworkError>) in
-                if case .failure(let error) = result {
+
+                switch result {
+                case .failure(let error):
                     switch error {
                     case .networkError(let message):
                         DispatchQueue.main.async {
+                            print("before leave in network error index : ", index)
+                            self.dispatchGroup.leave()
                             self.showAlert(message)
                         }
                     }
-                }
-                guard
-                    case .success(let value) = result
-                    else { return }
-                recipeList = value
-                if let recipeList = recipeList {
-                    let catagory = Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: true)
-                    self.catagories.append(catagory)
+                case .success(let value):
+                    recipeList = value
+                    print("appending catagory")
+                    if let recipeList = recipeList {
+                        let catagory = Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: true)
+                        self.catagories.append(catagory)
+                    }
+                    print("before leave in success index : ", index)
                     self.dispatchGroup.leave()
                 }
             }

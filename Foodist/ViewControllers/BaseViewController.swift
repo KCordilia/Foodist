@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, ShowPreference {
+class BaseViewController: UIViewController {
     var preferences: [Preference] = []
     var pageViewPreference: String = "dessert"
+
+    //TODO: - chnage variable name preferences
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,7 @@ class ViewController: UIViewController, ShowPreference {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchSavedPreference()
+        fetchPreference()
     }
 
     func setUpNavigationBar() {
@@ -32,7 +34,7 @@ class ViewController: UIViewController, ShowPreference {
         performSegue(withIdentifier: "showPreference", sender: self)
     }
 
-    fileprivate func fetchSavedPreference() {
+    fileprivate func fetchPreference() {
         if let savedPreference = UserDefaults.standard.object(forKey: "UserPreference") as? Data {
             let decoder = JSONDecoder()
             do {
@@ -48,13 +50,6 @@ class ViewController: UIViewController, ShowPreference {
             let breakfast = PreferenceOption(name: "breakfast", displayTitle: "Breakfast")
             let defaultPreference = Preference(catagory: "type", displayTitle: "Food Type", options: [mainCourse, dessert, italian, breakfast])
             preferences.append(defaultPreference)
-        }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showPreference" {
-            guard let destination = segue.destination as? PreferenceTableViewController else { return }
-            destination.preferenceDelegate = self
         }
     }
 }

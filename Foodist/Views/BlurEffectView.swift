@@ -12,13 +12,12 @@ class BlurEffectView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        let blurEffect = UIBlurEffect(style: .light)
+        let blurEffect = UIBlurEffect(style: .dark)
         self.backgroundColor = .clear
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         //always fill the view
         blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
         self.addSubview(blurEffectView)
     }
 }

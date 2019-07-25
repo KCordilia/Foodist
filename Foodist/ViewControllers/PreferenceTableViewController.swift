@@ -18,23 +18,30 @@ class PreferenceTableViewController: UITableViewController {
     var preferences: [Preference] = []
     var needToExpand: [Bool] = [true, true, true, true]
     var userPreferences: [Preference] = []
-    var preferenceDelegate: ShowPreference?
+    var saveButton = UIBarButtonItem()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Preferences"
         setUpModel()
         setUpTable()
+        setUpBarButton()
+    }
+
+    func setUpBarButton() {
+        saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveTapped))
+        saveButton.isEnabled = false
+        navigationItem.setRightBarButton(saveButton, animated: true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        if !userPreferences.isEmpty {
-            savePreference()
+        if saveButton.isEnabled {
+            showAlert("Do you want save the changes?")
         }
-        preferenceDelegate?.preferences = preferences
-}
+    }
 
     func setUpModel() {
         preferences = Preference.getAllPreferenceOptions()
-        //needToExpand = Array(repeating: true, count: preferences.count)
     }
 
     func setUpTable() {
@@ -42,6 +49,11 @@ class PreferenceTableViewController: UITableViewController {
         tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: headerIdentifier)
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+    }
+
+    @objc func saveTapped() {
+        savePreference()
+        saveButton.isEnabled = false
     }
 
     func removePreference(preference: Preference, option: PreferenceOption) {
@@ -79,6 +91,19 @@ class PreferenceTableViewController: UITableViewController {
         if let encoded = try? encoder.encode(userPreferences) {
             let defaults = UserDefaults.standard
             defaults.set(encoded, forKey: "UserPreference")
+            print("saved")
+        }
+    }
+
+    func fetchPreference() {
+        if let savedPreference = UserDefaults.standard.object(forKey: "UserPreference") as? Data {
+            let decoder = JSONDecoder()
+            do {
+                let savedPreference = try decoder.decode([Preference].self, from: savedPreference)
+                preferences = savedPreference
+            } catch let error {
+                print(error)
+            }
         }
     }
 
@@ -86,6 +111,17 @@ class PreferenceTableViewController: UITableViewController {
             let section = sender.tag
             needToExpand[section] = !needToExpand[section]
             tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+    }
+
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "Changes are not saved", message: message, preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: .default, handler: { _ in
+            self.savePreference()
+        })
+        alert.addAction(saveAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -148,7 +184,8 @@ class PreferenceTableViewController: UITableViewController {
             removePreference(preference: preference, option: selectedOption)
             cell?.accessoryType = .none
         }
-        print(userPreferences)
+        saveButton.isEnabled = userPreferences.count > 0
+        print("***************/n/n", userPreferences, "*****************/n/n")
 
     }
 

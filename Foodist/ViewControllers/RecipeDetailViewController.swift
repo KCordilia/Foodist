@@ -31,8 +31,7 @@ class RecipeDetailViewController: UIViewController {
             else { return }
         let ingredientsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/ingredientWidget.json"
         let instructionsEndpoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(recipe.id)/analyzedInstructions"
-        var networkHandler = NetworkHandler()
-        networkHandler.setUpHeaders()
+        let networkHandler = NetworkHandler()
         networkHandler.getAPIData(ingredientsEndpoint) { (result: Result<RecipeIngredient, NetworkError>) in
             if case .failure(let error) = result {
                 switch error {
