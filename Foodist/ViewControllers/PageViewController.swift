@@ -10,7 +10,7 @@ import UIKit
 
 class PageViewController: UIPageViewController {
 
-    var favouriteCatagory = "dessert"
+    var favouritecategory = "dessert"
     var endPoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type="
     let numberOfPages = 5
     var recipeList: RecipeList?
@@ -34,9 +34,9 @@ class PageViewController: UIPageViewController {
         appearance.currentPageIndicatorTintColor = .red
     }
 
-    func instantiateViewController() -> SelectedCatagoryViewController {
+    func instantiateViewController() -> CategoryViewController {
         guard
-            let selectedCategoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selectedCatagoryVC") as? SelectedCatagoryViewController
+            let selectedCategoryVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "selectedcategoryVC") as? CategoryViewController
             else { preconditionFailure("unexpected viewcontroller") }
             return selectedCategoryVC
     }
@@ -55,14 +55,14 @@ class PageViewController: UIPageViewController {
 
     func loadUrl() {
         if let parent = self.parent as? BaseViewController {
-            let typePreference = parent.preferences.filter { $0.catagory == "type" }
+            let typePreference = parent.preferences.filter { $0.category == "type" }
             if let randomOption = typePreference.first?.options.randomElement() {
-                favouriteCatagory = randomOption.name
+                favouritecategory = randomOption.name
                 print(randomOption.name)
-                parent.pageViewPreference = favouriteCatagory
+                parent.pageViewPreference = favouritecategory
             }
         }
-        endPoint += favouriteCatagory + "&number=\(numberOfPages)"
+        endPoint += favouritecategory + "&number=\(numberOfPages)"
 
         let networkHandler = NetworkHandler()
         networkHandler.getAPIData(endPoint) { (result: Result<RecipeList, NetworkError>) in
@@ -97,8 +97,8 @@ class PageViewController: UIPageViewController {
 
 extension PageViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let selectedCatagoryViewController = viewController as? SelectedCatagoryViewController {
-            let currentIndex = selectedCatagoryViewController.index
+        if let selectedcategoryViewController = viewController as? CategoryViewController {
+            let currentIndex = selectedcategoryViewController.index
             if currentIndex == 0 {
                 return nil
             } else {
@@ -115,8 +115,8 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let selectedCatagoryViewController = viewController as? SelectedCatagoryViewController {
-            let currentIndex = selectedCatagoryViewController.index
+        if let selectedcategoryViewController = viewController as? CategoryViewController {
+            let currentIndex = selectedcategoryViewController.index
             if let recipeList = recipeList {
                 let results = recipeList.results
                 if currentIndex == results.count - 1 {

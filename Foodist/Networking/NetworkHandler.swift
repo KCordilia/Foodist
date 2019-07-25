@@ -53,6 +53,7 @@ struct NetworkHandler {
             let decodedResult = try decoder.decode(CodableStruct.self, from: data)
             return .success(decodedResult)
         } catch let error {
+            print("error in decoding for ",CodableStruct.self)
             return .failure(error)
         }
     }

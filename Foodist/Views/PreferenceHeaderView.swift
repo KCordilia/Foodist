@@ -10,6 +10,6 @@ import UIKit
 
 class PreferenceHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var button: UIButton!
-    @IBOutlet weak var catagoryLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var separatorView: UIView!
 }

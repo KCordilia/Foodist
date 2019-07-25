@@ -8,9 +8,9 @@
 
 import UIKit
 
-class AllCatagoriesTableViewCell: UITableViewCell {
+class AllCategoriesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var catagoryName: UILabel!
+    @IBOutlet weak var categoryName: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
 
 }

@@ -1,5 +1,5 @@
 //
-//  CatagoryViewController.swift
+//  categoryViewController.swift
 //  Foodist
 //
 //  Created by Namitha Pavithran on 17/07/2019.
@@ -14,8 +14,8 @@ class AllCatagoriesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     // MARK: - Properties
-    let cellIdentifier = "allCatagoryTCell"
-    let collectionViewcellIdentifier = "allcatagoryCCell"
+    let cellIdentifier = "allcategoryTCell"
+    let collectionViewcellIdentifier = "allcategoryCCell"
     let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
     var catagories: [Category] = []
     var selectedRecipe: Recipe?
@@ -34,14 +34,20 @@ class AllCatagoriesViewController: UIViewController {
 
     func loadUrls() {
         if let parent = self.parent as? BaseViewController {
+            if parent.preferences.isEmpty {
+                print("preferences empty")
+                return
+            }
             let allPreferences = parent.preferences
-          //  let searchParameters = allPreferences.filter { $0.catagory == "intolerances" || $0.catagory == "diet" }
+          //  let searchParameters = allPreferences.filter { $0.category == "intolerances" || $0.category == "diet" }
             //allPreferences.re
             let otherCatagories = allPreferences.map { (element) -> [PreferenceOption] in
                 return element.options
             }
             var concatinated = Array(otherCatagories.joined())
-            concatinated.removeFirst()
+            if concatinated.count > 0 {
+                concatinated.removeFirst()
+            }
             for index in 0..<concatinated.count {
             let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=\(concatinated[index].name)"
             var recipeList: RecipeList?
@@ -61,10 +67,10 @@ class AllCatagoriesViewController: UIViewController {
                     }
                 case .success(let value):
                     recipeList = value
-                    print("appending catagory")
+                    print("appending category")
                     if let recipeList = recipeList {
-                        let catagory = Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: true)
-                        self.catagories.append(catagory)
+                        let category = Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: true)
+                        self.catagories.append(category)
                     }
                     print("before leave in success index : ", index)
                     self.dispatchGroup.leave()
@@ -106,10 +112,10 @@ extension AllCatagoriesViewController: UITableViewDataSource, UITableViewDelegat
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AllCatagoriesTableViewCell
-            else { preconditionFailure("deque cell failed in selected allcatagory table view ") }
-         let catagory = catagories[indexPath.row]
-            cell.catagoryName.text = catagory.name
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AllCategoriesTableViewCell
+            else { preconditionFailure("deque cell failed in selected allcategory table view ") }
+         let category = catagories[indexPath.row]
+            cell.categoryName.text = category.name
             cell.collectionView.dataSource = self
             cell.collectionView.delegate = self
             cell.collectionView.reloadData()
@@ -125,17 +131,17 @@ extension AllCatagoriesViewController: UITableViewDataSource, UITableViewDelegat
 extension AllCatagoriesViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         let catagory = catagories[collectionView.tag]
-            let recipies = catagory.recipes
+         let category = catagories[collectionView.tag]
+            let recipies = category.recipes
             return recipies.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewcellIdentifier, for: indexPath) as? AllCatagoryCollectionViewCell
-            else { preconditionFailure("deque cell failed in selected catagory collection view ") }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionViewcellIdentifier, for: indexPath) as? AllcategoryCollectionViewCell
+            else { preconditionFailure("deque cell failed in selected category collection view ") }
 
-         let catagory = catagories[collectionView.tag]
-            let recipe = catagory.recipes[indexPath.item]
+         let category = catagories[collectionView.tag]
+            let recipe = category.recipes[indexPath.item]
             cell.recipeName.text = recipe.title
             let imageUrl = recipeImageEndpoint + recipe.image
             if let url = URL(string: imageUrl) {
@@ -151,8 +157,8 @@ extension AllCatagoriesViewController: UICollectionViewDataSource, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let catagory = catagories[collectionView.tag]
-            let recipe = catagory.recipes[indexPath.item]
+            let category = catagories[collectionView.tag]
+            let recipe = category.recipes[indexPath.item]
             selectedRecipe = recipe
             performSegue(withIdentifier: "showDetail", sender: self)
     }

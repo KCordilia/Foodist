@@ -12,7 +12,7 @@ protocol ShowPreference: class {
     var preferences: [Preference] { get set }
 }
 struct Preference: Codable {
-    let catagory: String
+    let category: String
     let displayTitle: String
     var options: [PreferenceOption]
     static func getAllPreferenceOptions() -> [Preference] {
@@ -24,7 +24,7 @@ struct Preference: Codable {
         let salad = PreferenceOption(name: "salad", displayTitle: "Salad")
         let breakfast = PreferenceOption(name: "breakfast", displayTitle: "Breakfast")
 
-        let typePreference = Preference(catagory: "type", displayTitle: "Food Type", options: [mainCourse, sideDish, dessert, appetizer, salad, breakfast])
+        let typePreference = Preference(category: "type", displayTitle: "Food Type", options: [mainCourse, sideDish, dessert, appetizer, salad, breakfast])
 
         let irish = PreferenceOption(name: "irish", displayTitle: "Irish")
         let french = PreferenceOption(name: "french", displayTitle: "French")
@@ -33,19 +33,19 @@ struct Preference: Codable {
         let spanish = PreferenceOption(name: "spanish", displayTitle: "Spanish")
         let middleEastern = PreferenceOption(name: "middle+eastern", displayTitle: "Middle Eastern")
 
-        let cuisinePreference = Preference(catagory: "cuisine", displayTitle: "Cuisine", options: [irish, spanish, french, italian, mexican, middleEastern])
+        let cuisinePreference = Preference(category: "cuisine", displayTitle: "Cuisine", options: [irish, spanish, french, italian, mexican, middleEastern])
 
         let dairy = PreferenceOption(name: "dairy", displayTitle: "Dairy")
         let egg = PreferenceOption(name: "egg", displayTitle: "Egg")
         let gluten = PreferenceOption(name: "gluten", displayTitle: "Gluten")
         let peanut = PreferenceOption(name: "peanut", displayTitle: "Peanut")
 
-        let intolerancePreference = Preference(catagory: "intolerances", displayTitle: "Intolerances", options: [dairy, egg, gluten, peanut])
+        let intolerancePreference = Preference(category: "intolerances", displayTitle: "Intolerances", options: [dairy, egg, gluten, peanut])
 
         let vegan = PreferenceOption(name: "vegan", displayTitle: "Vegan")
         let vegetarian = PreferenceOption(name: "vegetarian", displayTitle: "Vegetarian")
 
-        let dietPreference = Preference(catagory: "diet", displayTitle: "Diet", options: [vegan, vegetarian])
+        let dietPreference = Preference(category: "diet", displayTitle: "Diet", options: [vegan, vegetarian])
 
         preferences = [typePreference, cuisinePreference, intolerancePreference, dietPreference]
         return preferences

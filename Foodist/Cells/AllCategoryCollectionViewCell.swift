@@ -1,5 +1,5 @@
 //
-//  CatagoryCollectionViewCell.swift
+//  categoryCollectionViewCell.swift
 //  Foodist
 //
 //  Created by Namitha Pavithran on 17/07/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllCatagoryCollectionViewCell: UICollectionViewCell {
+class AllcategoryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeName: UILabel!

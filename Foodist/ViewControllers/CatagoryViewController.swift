@@ -1,5 +1,5 @@
 //
-//  SelectedCatagoryViewController.swift
+//  SelectedcategoryViewController.swift
 //  Foodist
 //
 //  Created by Namitha Pavithran on 17/07/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectedCatagoryViewController: UIViewController {
+class CategoryViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var recipeNameLabel: UILabel!

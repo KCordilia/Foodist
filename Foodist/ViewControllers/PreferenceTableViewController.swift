@@ -70,9 +70,9 @@ class PreferenceTableViewController: UITableViewController {
 
         var isPresent = false
         for index in 0..<userPreferences.count {
-            if userPreferences[index].catagory == preference.catagory {
+            if userPreferences[index].category == preference.category {
                var existingPreference = userPreferences.remove(at: index)
-                //existingPreference = Preference(catagory: removed.catagory, displayTitle: removed.displayTitle, options: removed.options)
+                //existingPreference = Preference(category: removed.category, displayTitle: removed.displayTitle, options: removed.options)
                 existingPreference.options.append(option)
                 userPreferences.append(existingPreference)
                 isPresent = true
@@ -80,7 +80,7 @@ class PreferenceTableViewController: UITableViewController {
             }
         }
         if !isPresent {
-            let userPreference = Preference(catagory: preference.catagory, displayTitle: preference.displayTitle, options: [option])
+            let userPreference = Preference(category: preference.category, displayTitle: preference.displayTitle, options: [option])
             userPreferences.append(userPreference)
         }
 
@@ -143,7 +143,7 @@ class PreferenceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerIdentifier) as? PreferenceHeaderView else { preconditionFailure("header view is not available") }
-        headerView.catagoryLabel.text = preferences[section].displayTitle
+        headerView.categoryLabel.text = preferences[section].displayTitle
         headerView.button.tag = section
         headerView.button.addTarget(self, action: #selector(sectionTapped(sender:)), for: .touchUpInside)
         if needToExpand[section] {

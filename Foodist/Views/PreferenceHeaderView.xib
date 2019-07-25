@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -73,7 +69,7 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="button" destination="7bY-p0-XDP" id="CUP-89-qAT"/>
-                <outlet property="catagoryLabel" destination="dBe-Zt-4Db" id="ScV-Fl-enV"/>
+                <outlet property="categoryLabel" destination="dBe-Zt-4Db" id="ScV-Fl-enV"/>
                 <outlet property="separatorView" destination="QfW-1e-L6G" id="5RL-NB-ziG"/>
             </connections>
             <point key="canvasLocation" x="160.86956521739131" y="41.517857142857139"/>
