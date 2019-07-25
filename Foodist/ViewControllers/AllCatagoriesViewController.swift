@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllCatagoriesViewController: BaseViewController {
+class AllCatagoriesViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
