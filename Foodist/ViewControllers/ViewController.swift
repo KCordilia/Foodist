@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, ShowPreference {
     var preferences: [Preference] = []
     var pageViewPreference: String = "dessert"
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()

@@ -18,7 +18,6 @@ class SelectedCatagoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("inside viewDidLoad ", index)
         setUpViewController()
     }
 

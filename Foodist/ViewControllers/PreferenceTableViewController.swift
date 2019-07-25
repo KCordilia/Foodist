@@ -18,7 +18,7 @@ class PreferenceTableViewController: UITableViewController {
     var preferences: [Preference] = []
     var needToExpand: [Bool] = [true, true, true, true]
     var userPreferences: [Preference] = []
-    var preferenceDelegate: ShowPreference?
+    weak var preferenceDelegate: ShowPreference?
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpModel()
@@ -57,15 +57,13 @@ class PreferenceTableViewController: UITableViewController {
     func addPreference(preference: Preference, option: PreferenceOption) {
 
         var isPresent = false
-        for index in 0..<userPreferences.count {
-            if userPreferences[index].catagory == preference.catagory {
+        for index in 0..<userPreferences.count where userPreferences[index].catagory == preference.catagory {
                var existingPreference = userPreferences.remove(at: index)
                 //existingPreference = Preference(catagory: removed.catagory, displayTitle: removed.displayTitle, options: removed.options)
                 existingPreference.options.append(option)
                 userPreferences.append(existingPreference)
                 isPresent = true
                 break
-            }
         }
         if !isPresent {
             let userPreference = Preference(catagory: preference.catagory, displayTitle: preference.displayTitle, options: [option])
