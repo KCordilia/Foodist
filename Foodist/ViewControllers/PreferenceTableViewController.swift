@@ -91,6 +91,7 @@ class PreferenceTableViewController: UITableViewController {
         if let encoded = try? encoder.encode(userPreferences) {
             let defaults = UserDefaults.standard
             defaults.set(encoded, forKey: "UserPreference")
+            NotificationCenter.default.post(name: reloadPageNotification, object: nil, userInfo: nil)
             print("saved")
         }
     }
@@ -190,3 +191,4 @@ class PreferenceTableViewController: UITableViewController {
     }
 
 }
+

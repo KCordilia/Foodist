@@ -11,7 +11,7 @@ import UIKit
 class BaseViewController: UIViewController {
     var preferences: [Preference] = []
     var pageViewPreference: String = "dessert"
-
+    var previousPageIsPreference = false
     //TODO: - chnage variable name preferences
     
     override func viewDidLoad() {
@@ -50,7 +50,14 @@ class BaseViewController: UIViewController {
             let italian = PreferenceOption(apiName: "italian", displayTitle: "Italian")
             let breakfast = PreferenceOption(apiName: "breakfast", displayTitle: "Breakfast")
             let defaultPreference = Preference(apiCategory: "type", displayTitle: "Food Type", options: [mainCourse, dessert, italian, breakfast])
+
+            let vegetarian = PreferenceOption(apiName: "vegetarian", displayTitle: "Vegetarian")
+            let dairy = PreferenceOption(apiName: "dairy", displayTitle: "Dairy")
+            let defaultIntolerance = Preference(apiCategory: "intolerances", displayTitle: "Intolerances", options: [dairy])
+            let defaultDiet = Preference(apiCategory: "diet", displayTitle: "Diet", options: [vegetarian])
             preferences.append(defaultPreference)
+            preferences.append(defaultIntolerance)
+            preferences.append(defaultDiet)
         }
     }
 }
