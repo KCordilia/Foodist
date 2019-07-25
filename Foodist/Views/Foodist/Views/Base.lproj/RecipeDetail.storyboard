@@ -41,38 +41,30 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="t1F-nn-l3x" userLabel="Cooking Time">
-                                            <rect key="frame" x="20" y="295" width="355" height="21"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="t1F-nn-l3x" userLabel="Cooking Time">
+                                            <rect key="frame" x="14" y="295" width="349" height="21"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cooking Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HL-ZA-bkA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Cooking Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HL-ZA-bkA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="247.66666666666666" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6J-Z9-0ib">
-                                                    <rect key="frame" x="125.66666666666666" y="0.0" width="103.66666666666666" height="21"/>
+                                                    <rect key="frame" x="255.66666666666669" y="0.0" width="21" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Minutes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5K3-td-tMg">
-                                                    <rect key="frame" x="251.33333333333329" y="0.0" width="103.66666666666666" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5K3-td-tMg">
+                                                    <rect key="frame" x="284.66666666666669" y="0.0" width="64.333333333333314" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="I6J-Z9-0ib" firstAttribute="top" secondItem="t1F-nn-l3x" secondAttribute="top" id="8Mc-r9-h3y"/>
-                                                <constraint firstItem="1HL-ZA-bkA" firstAttribute="top" secondItem="t1F-nn-l3x" secondAttribute="top" id="Pby-h6-VmT"/>
-                                                <constraint firstItem="1HL-ZA-bkA" firstAttribute="leading" secondItem="t1F-nn-l3x" secondAttribute="leading" id="TR3-uv-h6k"/>
-                                                <constraint firstAttribute="bottom" secondItem="I6J-Z9-0ib" secondAttribute="bottom" id="brN-4y-ILP"/>
-                                                <constraint firstAttribute="bottom" secondItem="5K3-td-tMg" secondAttribute="bottom" id="eg9-cD-RLc"/>
-                                                <constraint firstAttribute="trailing" secondItem="5K3-td-tMg" secondAttribute="trailing" id="gWd-St-oy7"/>
-                                                <constraint firstAttribute="bottom" secondItem="1HL-ZA-bkA" secondAttribute="bottom" id="gm0-23-wvN"/>
                                                 <constraint firstAttribute="height" constant="21" id="ss3-Z7-TPz"/>
-                                                <constraint firstItem="5K3-td-tMg" firstAttribute="top" secondItem="t1F-nn-l3x" secondAttribute="top" id="vOO-sa-g2s"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
@@ -82,13 +74,13 @@
                                         <constraint firstItem="dhF-7q-VAI" firstAttribute="trailing" secondItem="epB-kp-cSq" secondAttribute="trailing" id="3hD-gD-9FW"/>
                                         <constraint firstItem="epB-kp-cSq" firstAttribute="trailing" secondItem="eja-z2-e47" secondAttribute="trailing" id="788-tU-LRR"/>
                                         <constraint firstItem="epB-kp-cSq" firstAttribute="height" secondItem="SzE-eX-B4z" secondAttribute="height" multiplier="0.2" id="89h-Lm-b7q"/>
-                                        <constraint firstItem="t1F-nn-l3x" firstAttribute="leading" secondItem="SzE-eX-B4z" secondAttribute="leading" constant="20" id="Bfh-vM-gnR"/>
+                                        <constraint firstItem="t1F-nn-l3x" firstAttribute="leading" secondItem="SzE-eX-B4z" secondAttribute="leading" constant="14" id="Bfh-vM-gnR"/>
                                         <constraint firstAttribute="trailing" secondItem="eja-z2-e47" secondAttribute="trailing" id="Dxb-TM-Tos"/>
                                         <constraint firstItem="epB-kp-cSq" firstAttribute="leading" secondItem="eja-z2-e47" secondAttribute="leading" id="FM2-P4-OIO"/>
                                         <constraint firstItem="t1F-nn-l3x" firstAttribute="top" secondItem="eja-z2-e47" secondAttribute="bottom" constant="8" id="MtA-Ze-8Uj"/>
                                         <constraint firstItem="t1F-nn-l3x" firstAttribute="top" secondItem="dhF-7q-VAI" secondAttribute="bottom" constant="20" id="RTp-19-XTs"/>
                                         <constraint firstItem="eja-z2-e47" firstAttribute="leading" secondItem="SzE-eX-B4z" secondAttribute="leading" id="Z6z-JG-Fgn"/>
-                                        <constraint firstAttribute="trailing" secondItem="t1F-nn-l3x" secondAttribute="trailing" id="iX9-dd-9VE"/>
+                                        <constraint firstAttribute="trailing" secondItem="t1F-nn-l3x" secondAttribute="trailing" constant="12" id="iX9-dd-9VE"/>
                                         <constraint firstItem="epB-kp-cSq" firstAttribute="bottom" secondItem="eja-z2-e47" secondAttribute="bottom" id="kPP-JC-flc"/>
                                         <constraint firstAttribute="bottom" secondItem="t1F-nn-l3x" secondAttribute="bottom" constant="8.6666666666666856" id="kya-P2-81E"/>
                                         <constraint firstItem="t1F-nn-l3x" firstAttribute="top" secondItem="epB-kp-cSq" secondAttribute="bottom" constant="8" id="p7M-5M-05x"/>
@@ -198,35 +190,32 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXQ-hm-mEv">
                                         <rect key="frame" x="0.0" y="0.0" width="56.666666666666664" height="40"/>
-                                        <state key="normal" image="Navigation_Rewind_2x"/>
+                                        <state key="normal" image="Previous"/>
                                         <connections>
-                                            <action selector="previous:" destination="vMz-cz-v5q" eventType="touchUpInside" id="WRS-VY-Dy7"/>
                                             <action selector="previous:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="b6v-qh-aC4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sHj-Bp-Xdr">
                                         <rect key="frame" x="64.666666666666671" y="0.0" width="56.666666666666671" height="40"/>
-                                        <state key="normal" image="Navigation_Play_2x"/>
+                                        <state key="normal" image="Play"/>
                                         <state key="highlighted" image="Navigation_Pause_2x"/>
                                         <connections>
-                                            <action selector="play:" destination="vMz-cz-v5q" eventType="touchUpInside" id="ERQ-KO-byw"/>
                                             <action selector="playAndPause:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="Apc-V6-Llm"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKK-Kv-H8m">
                                         <rect key="frame" x="129.33333333333334" y="0.0" width="56.333333333333343" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" image="Navigation_Stop_2x"/>
+                                        <state key="normal" image="Stop"/>
                                         <connections>
                                             <action selector="stop:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="d8l-Q1-YcB"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ty-mk-JhI">
                                         <rect key="frame" x="193.66666666666666" y="0.0" width="56.666666666666657" height="40"/>
-                                        <state key="normal" image="Navigation_FastForward_2x"/>
+                                        <state key="normal" image="Next"/>
                                         <connections>
                                             <action selector="next:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="4FH-4X-x5F"/>
-                                            <action selector="next:" destination="vMz-cz-v5q" eventType="touchUpInside" id="bMT-fT-Xch"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sb-zF-eZr">
@@ -252,22 +241,21 @@
                     </view>
                     <connections>
                         <outlet property="nextButton" destination="3ty-mk-JhI" id="xGb-KX-SZ3"/>
-                        <outlet property="playButtonImage" destination="sHj-Bp-Xdr" id="LKe-ag-mw6"/>
+                        <outlet property="playAndPauseButton" destination="sHj-Bp-Xdr" id="LKe-ag-mw6"/>
                         <outlet property="previousButton" destination="WXQ-hm-mEv" id="4ei-tF-paq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWU-Yt-L9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="vMz-cz-v5q" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3118" y="-743"/>
         </scene>
     </scenes>
     <resources>
-        <image name="Navigation_FastForward_2x" width="24" height="15.5"/>
         <image name="Navigation_Pause_2x" width="15" height="19"/>
-        <image name="Navigation_Play_2x" width="17" height="19"/>
-        <image name="Navigation_Rewind_2x" width="24" height="15.5"/>
-        <image name="Navigation_Stop_2x" width="17.5" height="17.5"/>
+        <image name="Next" width="24" height="15.5"/>
+        <image name="Play" width="17" height="19"/>
+        <image name="Previous" width="24" height="15.5"/>
+        <image name="Stop" width="17.5" height="17.5"/>
         <image name="microphone" width="30" height="30"/>
     </resources>
 </document>

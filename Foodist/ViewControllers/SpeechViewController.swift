@@ -14,14 +14,20 @@ protocol Speakable: class {
     func setUpTextToSpeak(_ text: String)
 }
 
+enum PlayerState {
+    case playing
+    case paused
+    case stopped
+}
+
 class SpeechViewController: UIViewController {
-    @IBOutlet weak var playButtonImage: UIButton!
+    @IBOutlet weak var playAndPauseButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     let speechSynthesizer = AVSpeechSynthesizer()
     var speechUtterance: AVSpeechUtterance?
     var recipeInstructions: [String] = []
-    var currentState: State = .stopped
+    var currentState: PlayerState = .stopped
     var currentIndex = 0
     var sourceVC: RecipeDetailViewController?
     var spokenTextLengths = 0
@@ -34,19 +40,12 @@ class SpeechViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
-        playButtonImage.isEnabled = false
+        playAndPauseButton.isEnabled = false
         speechSynthesizer.delegate = self
     }
 
     @IBAction func previous(_ sender: Any) {
-        currentIndex -= 1
-        if currentIndex <= recipeInstructions.count + 1 {
-            stop()
-            play(stringToPlay: recipeInstructions[currentIndex])
-        }
-        if currentIndex == 0 {
-            previousButton.isEnabled = false
-        }
+        previous()
     }
 
     @IBAction func playAndPause(_ sender: Any) {
@@ -82,7 +81,7 @@ class SpeechViewController: UIViewController {
         if currentState == .stopped {
             currentState = .playing
             setAvailabiltyForControls()
-            playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
+            playAndPauseButton.setImage(UIImage(named: "Pause"), for: .normal)
             do {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: .defaultToSpeaker)
                 try AVAudioSession.sharedInstance().setActive(true, options: .notifyOthersOnDeactivation)
@@ -92,7 +91,7 @@ class SpeechViewController: UIViewController {
             speechSynthesizer.speak(speechUtterance)
         } else if currentState == .paused {
             speechSynthesizer.continueSpeaking()
-            playButtonImage.setImage(UIImage(named: "Navigation_Pause_2x"), for: .normal)
+            playAndPauseButton.setImage(UIImage(named: "Pause"), for: .normal)
             currentState = .playing
         } else {
             speechSynthesizer.speak(speechUtterance)
@@ -103,7 +102,7 @@ class SpeechViewController: UIViewController {
         currentState = .paused
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.pauseSpeaking(at: AVSpeechBoundary.word)
-            playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
+            playAndPauseButton.setImage(UIImage(named: "Play"), for: .normal)
         } else {
             play(stringToPlay: recipeInstructions[currentIndex])
             currentState = .playing
@@ -114,7 +113,7 @@ class SpeechViewController: UIViewController {
         currentState = .stopped
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: AVSpeechBoundary.word)
-            playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
+            playAndPauseButton.setImage(UIImage(named: "Play"), for: .normal)
             disableAVSession()
             setAvailabiltyForControls()
         }
@@ -147,6 +146,20 @@ class SpeechViewController: UIViewController {
         }
     }
 
+    func previous() {
+        currentIndex -= 1
+        if currentIndex == 0 {
+            previousButton.isEnabled = false
+            stopRecognition()
+        }
+
+        if currentIndex <= recipeInstructions.count + 1 {
+            stop()
+            play(stringToPlay: recipeInstructions[currentIndex])
+            stopRecognition()
+        }
+    }
+
     func next() {
         currentIndex += 1
         if currentIndex <= recipeInstructions.count - 1 {
@@ -156,6 +169,7 @@ class SpeechViewController: UIViewController {
         if currentIndex == recipeInstructions.count - 1 {
             nextButton.isEnabled = false
         }
+        stopRecognition()
     }
 
     func recordAndRecognizeSpeech() {
@@ -181,34 +195,43 @@ class SpeechViewController: UIViewController {
 
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
             if let result = result {
-                let bestString = result.bestTranscription.formattedString
+                let bestString = result.bestTranscription.formattedString.lowercased()
 
                 var lastString: String = ""
                 for segment in result.bestTranscription.segments {
                     let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
                     lastString = String(bestString[indexTo...])
                 }
-                DispatchQueue.main.async {
-                    self.voiceNextLine(resultString: lastString)
-                }
+                self.voiceCommand(resultString: lastString)
 
             } else if let error = error {
                 print(error)
             }
         })
     }
-    func voiceNextLine(resultString: String) {
-        if resultString == "next" {
+    func voiceCommand(resultString: String) {
+        switch resultString {
+        case "next":
             next()
-            print(resultString)
+        case "previous":
+            previous()
+        default:
+            break
         }
+    }
+
+    func stopRecognition() {
+        audioEngine.stop()
+        request.endAudio()
+        recognitionTask?.cancel()
+        audioEngine.inputNode.removeTap(onBus: 0)
     }
 }
 
 extension SpeechViewController: Speakable {
     func setUpTextToSpeak(_ text: String) {
         recipeInstructions.append(text)
-        playButtonImage.isEnabled = true
+        playAndPauseButton.isEnabled = true
     }
 }
 
@@ -216,5 +239,11 @@ extension SpeechViewController: AVSpeechSynthesizerDelegate {
 
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         sourceVC?.highlightText(range: characterRange, indexPath: IndexPath(row: currentIndex, section: 1))
+    }
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        recordAndRecognizeSpeech()
+        playAndPauseButton.setImage(UIImage(named: "Play"), for: .normal)
+
     }
 }
