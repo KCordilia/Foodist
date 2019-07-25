@@ -107,13 +107,23 @@ class RecipeDetailViewController: UIViewController {
                  speakDelegate?.setUpTextToSpeak(steps.step)
             })
         }
-
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSpeech" {
             guard let destinationVC = segue.destination as? SpeechViewController else { return }
             self.speakDelegate = destinationVC
+            destinationVC.sourceVC = self
         }
+    }
+
+    func highlightText(range: NSRange, indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as?
+            InstructionCell else { return }
+        let text = instructionList[indexPath.row].step
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.green], range: range)
+        cell.instructionLabel.attributedText = attributedString
     }
 
    /* func highlightWord(_ text: String, indexPath: IndexPath, characterRange: NSRange,spokenTextLengths: Int) {

@@ -35,6 +35,7 @@ class SpeechViewController: UIViewController {
         super.viewDidLoad()
         initialSetup()
         playButtonImage.isEnabled = false
+        speechSynthesizer.delegate = self
     }
 
     @IBAction func previous(_ sender: Any) {
@@ -104,7 +105,7 @@ class SpeechViewController: UIViewController {
             speechSynthesizer.pauseSpeaking(at: AVSpeechBoundary.word)
             playButtonImage.setImage(UIImage(named: "Navigation_Play_2x"), for: .normal)
         } else {
-            play(stringToPlay: recipeInstructions[0])
+            play(stringToPlay: recipeInstructions[currentIndex])
             currentState = .playing
         }
     }
@@ -212,6 +213,11 @@ extension SpeechViewController: Speakable {
 }
 
 extension SpeechViewController: AVSpeechSynthesizerDelegate {
+
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
+        sourceVC?.highlightText(range: characterRange, indexPath: IndexPath(row: currentIndex, section: 1))
+    }
+
    /* func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, willSpeakRangeOfSpeechString characterRange: NSRange, utterance: AVSpeechUtterance) {
         // Determine the current range in the whole text (all utterances), not just the current one.
         let rangeInTotalText = NSMakeRange(spokenTextLengths + characterRange.location, characterRange.length)

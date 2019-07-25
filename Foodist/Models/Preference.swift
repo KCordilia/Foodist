@@ -11,12 +11,11 @@ import Foundation
 protocol ShowPreference {
     var preferences: [Preference] { get set }
 }
-struct Preference {
+struct Preference: Codable {
     let catagory: String
     let displayTitle: String
     var options: [PreferenceOption]
-    //static let shared = Preference()
-   static func getAllPreferenceOptions() -> [Preference] {
+    static func getAllPreferenceOptions() -> [Preference] {
         var preferences: [Preference] = []
         let mainCourse = PreferenceOption(name: "main+course", displayTitle: "Main course")
         let sideDish = PreferenceOption(name: "side+dish", displayTitle: "Side dish")
@@ -53,7 +52,7 @@ struct Preference {
     }
 
 }
-struct PreferenceOption {
+struct PreferenceOption: Codable {
     let name: String
     let displayTitle: String
 }

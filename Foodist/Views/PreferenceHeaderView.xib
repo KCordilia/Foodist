@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PreferenceHeaderView" customModule="Foodist" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efu-Vb-Irn">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DbT-jL-Q81">
+                            <rect key="frame" x="20" y="8" width="374" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBe-Zt-4Db">
+                                    <rect key="frame" x="0.0" y="0.0" width="291" height="44"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bY-p0-XDP">
+                                    <rect key="frame" x="299" y="0.0" width="75" height="44"/>
+                                    <color key="backgroundColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <size key="titleShadowOffset" width="0.0" height="-1"/>
+                                    <state key="normal" image="down">
+                                        <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="7bY-p0-XDP" firstAttribute="width" secondItem="DbT-jL-Q81" secondAttribute="width" multiplier="0.2" id="Tta-sR-4Ek"/>
+                            </constraints>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QfW-1e-L6G">
+                            <rect key="frame" x="0.0" y="59" width="414" height="1"/>
+                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="sX1-uP-hTW"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="QfW-1e-L6G" secondAttribute="bottom" id="6cV-CW-o5T"/>
+                        <constraint firstAttribute="trailing" secondItem="QfW-1e-L6G" secondAttribute="trailing" id="LJl-Bt-cme"/>
+                        <constraint firstItem="DbT-jL-Q81" firstAttribute="leading" secondItem="efu-Vb-Irn" secondAttribute="leading" constant="20" id="Nkf-z4-vUQ"/>
+                        <constraint firstAttribute="trailing" secondItem="DbT-jL-Q81" secondAttribute="trailing" constant="20" id="e26-lE-iBM"/>
+                        <constraint firstAttribute="bottom" secondItem="DbT-jL-Q81" secondAttribute="bottom" constant="8" id="flt-8g-Kt6"/>
+                        <constraint firstItem="QfW-1e-L6G" firstAttribute="leading" secondItem="efu-Vb-Irn" secondAttribute="leading" id="ibW-qh-u6d"/>
+                        <constraint firstItem="DbT-jL-Q81" firstAttribute="top" secondItem="efu-Vb-Irn" secondAttribute="top" constant="8" id="oSt-Pc-7cp"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="efu-Vb-Irn" secondAttribute="bottom" id="FP5-al-vAt"/>
+                <constraint firstItem="efu-Vb-Irn" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="GGI-bO-1hU"/>
+                <constraint firstItem="efu-Vb-Irn" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="RfQ-Eh-Gcu"/>
+                <constraint firstItem="efu-Vb-Irn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i8a-Wp-Kzd"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="button" destination="7bY-p0-XDP" id="CUP-89-qAT"/>
+                <outlet property="catagoryLabel" destination="dBe-Zt-4Db" id="ScV-Fl-enV"/>
+                <outlet property="separatorView" destination="QfW-1e-L6G" id="5RL-NB-ziG"/>
+            </connections>
+            <point key="canvasLocation" x="160.86956521739131" y="41.517857142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="down" width="25" height="25"/>
+    </resources>
+</document>

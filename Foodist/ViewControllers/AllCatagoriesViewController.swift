@@ -19,6 +19,8 @@ class AllCatagoriesViewController: ViewController {
     let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
     var catagories: [Category] = []
     var selectedRecipe: Recipe?
+    let dispatchQueue = DispatchQueue(label: "queue_for_catagories")
+    let dispatchGroup = DispatchGroup()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,23 +28,23 @@ class AllCatagoriesViewController: ViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-       // loadUrls()
+        super.viewDidAppear(animated)
+        loadUrls()
     }
 
     func loadUrls() {
-        //load catagory. find catagories and attach it to Url and pass the url to networking function. for now default catagory is main+course.
-       // catagories =
-       // let excludeItem =
         if let parent = self.parent as? ViewController {
             let otherCatagories = parent.preferences.map { (element) -> [PreferenceOption] in
                 return element.options
             }
-            let concatinated = Array(otherCatagories.joined())
+            var concatinated = Array(otherCatagories.joined())
+            concatinated.removeFirst()
             for index in 0..<concatinated.count {
             let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=\(concatinated[index].name)"
             var recipeList: RecipeList?
             var networkHandler = NetworkHandler()
             networkHandler.setUpHeaders()
+            dispatchGroup.enter()
             networkHandler.getAPIData(urlString) { (result: Result<RecipeList, NetworkError>) in
                 if case .failure(let error) = result {
                     switch error {
@@ -59,15 +61,17 @@ class AllCatagoriesViewController: ViewController {
                 if let recipeList = recipeList {
                     let catagory = Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: true)
                     self.catagories.append(catagory)
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                    self.dispatchGroup.leave()
                 }
             }
         }
-
+            dispatchGroup.notify(queue: dispatchQueue) {
+                print("notified")
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+        }
     }
-
 }
 
     func showAlert(_ message: String) {
