@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Speech
 
 protocol Speakable: class {
     func setUpTextToSpeak(_ text: String)
@@ -25,6 +26,10 @@ class SpeechViewController: UIViewController {
     var sourceVC: RecipeDetailViewController?
     var spokenTextLengths = 0
     var currentUtterance = 0
+    let audioEngine = AVAudioEngine()
+    let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
+    let request = SFSpeechAudioBufferRecognitionRequest()
+    var recognitionTask: SFSpeechRecognitionTask?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,14 +61,11 @@ class SpeechViewController: UIViewController {
     }
 
     @IBAction func next(_ sender: Any) {
-        currentIndex += 1
-        if currentIndex <= recipeInstructions.count - 1 {
-            stop()
-            play(stringToPlay: recipeInstructions[currentIndex])
-        }
-        if currentIndex == recipeInstructions.count - 1 {
-            nextButton.isEnabled = false
-        }
+        next()
+    }
+
+    @IBAction func enableVoiceControl(_ sender: Any) {
+        recordAndRecognizeSpeech()
     }
 
     func play(stringToPlay: String) {
@@ -141,6 +143,63 @@ class SpeechViewController: UIViewController {
             try AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
         } catch {
             print("audioSession properties weren't disabled.")
+        }
+    }
+
+    func next() {
+        currentIndex += 1
+        if currentIndex <= recipeInstructions.count - 1 {
+            stop()
+            play(stringToPlay: recipeInstructions[currentIndex])
+        }
+        if currentIndex == recipeInstructions.count - 1 {
+            nextButton.isEnabled = false
+        }
+    }
+
+    func recordAndRecognizeSpeech() {
+        let node = audioEngine.inputNode
+        let recordingFormat = node.outputFormat(forBus: 0)
+        node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
+            self.request.append(buffer)
+        }
+
+        audioEngine.prepare()
+        do {
+            try audioEngine.start()
+        } catch {
+            return print(error)
+        }
+
+        guard
+            let myRecognizer = SFSpeechRecognizer()
+            else { return }
+        if !myRecognizer.isAvailable {
+            return
+        }
+
+        recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
+            if let result = result {
+                let bestString = result.bestTranscription.formattedString
+
+                var lastString: String = ""
+                for segment in result.bestTranscription.segments {
+                    let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
+                    lastString = String(bestString[indexTo...])
+                }
+                DispatchQueue.main.async {
+                    self.voiceNextLine(resultString: lastString)
+                }
+
+            } else if let error = error {
+                print(error)
+            }
+        })
+    }
+    func voiceNextLine(resultString: String) {
+        if resultString == "next" {
+            next()
+            print(resultString)
         }
     }
 }
