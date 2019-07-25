@@ -58,7 +58,7 @@ class PreferenceTableViewController: UITableViewController {
 
     func removePreference(preference: Preference, option: PreferenceOption) {
         for index in 0..<userPreferences.count {
-            userPreferences[index].options.removeAll(where: {$0.name == option.name})
+            userPreferences[index].options.removeAll(where: {$0.apiName == option.apiName})
                         if userPreferences[index].options.count == 0 {
                             userPreferences.remove(at: index)
                         }
@@ -70,7 +70,7 @@ class PreferenceTableViewController: UITableViewController {
 
         var isPresent = false
         for index in 0..<userPreferences.count {
-            if userPreferences[index].category == preference.category {
+            if userPreferences[index].apiCategory == preference.apiCategory {
                var existingPreference = userPreferences.remove(at: index)
                 //existingPreference = Preference(category: removed.category, displayTitle: removed.displayTitle, options: removed.options)
                 existingPreference.options.append(option)
@@ -80,7 +80,7 @@ class PreferenceTableViewController: UITableViewController {
             }
         }
         if !isPresent {
-            let userPreference = Preference(category: preference.category, displayTitle: preference.displayTitle, options: [option])
+            let userPreference = Preference(apiCategory: preference.apiCategory, displayTitle: preference.displayTitle, options: [option])
             userPreferences.append(userPreference)
         }
 
