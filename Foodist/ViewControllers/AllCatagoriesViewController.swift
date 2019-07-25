@@ -81,7 +81,6 @@ class AllCatagoriesViewController: UIViewController {
                 urls.append(url)
             }
         }
-
         if cuisinePreference.count > 0 {
             cuisinePreference[0].options.forEach { (option) in
                 allCategories.append(option)
@@ -147,7 +146,7 @@ class AllCatagoriesViewController: UIViewController {
                 formUrl(with: savedPreference)
                 print(savedPreference)
             } catch let error {
-                print("error in decoding preference ",error)
+                print("error in decoding preference ", error)
                 return
             }
         } else {
@@ -283,4 +282,3 @@ extension AllCatagoriesViewController: UICollectionViewDataSource, UICollectionV
             performSegue(withIdentifier: "showDetail", sender: self)
     }
 }
-

@@ -25,6 +25,7 @@ class PageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(reloadPage), name: reloadPageNotification, object: nil)
+        setUpPageControl()
         loadUrl()
     }
 
@@ -157,4 +158,3 @@ extension PageViewController: UIPageViewControllerDataSource, UIPageViewControll
         return 0
     }
 }
-

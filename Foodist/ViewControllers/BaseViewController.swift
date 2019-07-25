@@ -13,7 +13,7 @@ class BaseViewController: UIViewController {
     var pageViewPreference: String = "dessert"
     var previousPageIsPreference = false
     //TODO: - chnage variable name preferences
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationBar()
@@ -41,7 +41,7 @@ class BaseViewController: UIViewController {
                let savedPreference = try decoder.decode([Preference].self, from: savedPreference)
                 preferences = savedPreference
             } catch let error {
-                print("error in decoding preference ",error)
+                print("error in decoding preference ", error)
                 return
             }
         } else {

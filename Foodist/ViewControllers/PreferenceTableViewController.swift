@@ -189,6 +189,4 @@ class PreferenceTableViewController: UITableViewController {
         print("***************/n/n", userPreferences, "*****************/n/n")
 
     }
-
 }
-
