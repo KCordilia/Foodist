@@ -30,8 +30,8 @@ class PageViewController: UIPageViewController {
 
     fileprivate func setUpPageControl() {
         let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
-        appearance.pageIndicatorTintColor = .yellow
-        appearance.currentPageIndicatorTintColor = .red
+        appearance.pageIndicatorTintColor = .lightGray
+        appearance.currentPageIndicatorTintColor = .black
     }
 
     func instantiateViewController() -> CategoryViewController {
