@@ -107,7 +107,7 @@ class RecipeDetailViewController: UIViewController {
             })
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showSpeech" {
             guard let destinationVC = segue.destination as? SpeechViewController else { return }

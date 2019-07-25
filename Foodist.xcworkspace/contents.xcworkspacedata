@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:FoodistAPI.playground">
-   </FileRef>
-   <FileRef
       location = "group:Foodist.xcodeproj">
    </FileRef>
    <FileRef

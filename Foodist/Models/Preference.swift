@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ShowPreference {
+protocol ShowPreference: class {
     var preferences: [Preference] { get set }
 }
 struct Preference: Codable {
