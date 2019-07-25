@@ -55,10 +55,10 @@ class PageViewController: UIPageViewController {
 
     func loadUrl() {
         if let parent = self.parent as? BaseViewController {
-            let typePreference = parent.preferences.filter { $0.category == "type" }
+            let typePreference = parent.preferences.filter { $0.apiCategory == "type" }
             if let randomOption = typePreference.first?.options.randomElement() {
-                favouritecategory = randomOption.name
-                print(randomOption.name)
+                favouritecategory = randomOption.apiName
+                print(randomOption.apiName)
                 parent.pageViewPreference = favouritecategory
             }
         }

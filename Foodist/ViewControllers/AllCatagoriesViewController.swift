@@ -14,8 +14,8 @@ class AllCatagoriesViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     // MARK: - Properties
-    let cellIdentifier = "allcategoryTCell"
-    let collectionViewcellIdentifier = "allcategoryCCell"
+    let cellIdentifier = "allCategoryTCell"
+    let collectionViewcellIdentifier = "allCategoryCCell"
     let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
     var catagories: [Category] = []
     var selectedRecipe: Recipe?
@@ -49,7 +49,7 @@ class AllCatagoriesViewController: UIViewController {
                 concatinated.removeFirst()
             }
             for index in 0..<concatinated.count {
-            let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=\(concatinated[index].name)"
+            let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=\(concatinated[index].apiName)"
             var recipeList: RecipeList?
             let networkHandler = NetworkHandler()
             dispatchGroup.enter()

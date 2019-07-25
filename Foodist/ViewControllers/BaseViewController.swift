@@ -45,11 +45,11 @@ class BaseViewController: UIViewController {
                 return
             }
         } else {
-            let mainCourse = PreferenceOption(name: "main+course", displayTitle: "Main course")
-            let dessert = PreferenceOption(name: "dessert", displayTitle: "Dessert")
-            let italian = PreferenceOption(name: "italian", displayTitle: "Italian")
-            let breakfast = PreferenceOption(name: "breakfast", displayTitle: "Breakfast")
-            let defaultPreference = Preference(category: "type", displayTitle: "Food Type", options: [mainCourse, dessert, italian, breakfast])
+            let mainCourse = PreferenceOption(apiName: "main+course", displayTitle: "Main course")
+            let dessert = PreferenceOption(apiName: "dessert", displayTitle: "Dessert")
+            let italian = PreferenceOption(apiName: "italian", displayTitle: "Italian")
+            let breakfast = PreferenceOption(apiName: "breakfast", displayTitle: "Breakfast")
+            let defaultPreference = Preference(apiCategory: "type", displayTitle: "Food Type", options: [mainCourse, dessert, italian, breakfast])
             preferences.append(defaultPreference)
         }
     }
