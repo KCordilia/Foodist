@@ -16,9 +16,3 @@ struct Recipe: Codable {
     let servings: Int
     let image: String
 }
-
-enum State {
-    case playing
-    case paused
-    case stopped
-}

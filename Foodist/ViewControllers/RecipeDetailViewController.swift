@@ -121,74 +121,14 @@ class RecipeDetailViewController: UIViewController {
             InstructionCell else { return }
         let text = instructionList[indexPath.row].step
         let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.green], range: range)
+        attributedString.addAttributes([NSAttributedString.Key.backgroundColor: UIColor.yellow], range: range)
         cell.instructionLabel.attributedText = attributedString
     }
 
-   /* func highlightWord(_ text: String, indexPath: IndexPath, characterRange: NSRange,spokenTextLengths: Int) {
-        guard
-            let instructionCell = tableView.cellForRow(at: indexPath) as? InstructionCell
-            else { return }
-
-        let rangeInTotalText = NSMakeRange(spokenTextLengths + characterRange.location, characterRange.length)
-
-        let attributedString = NSMutableAttributedString(string: (instructionCell.instructionLabel.attributedText?.attributedSubstring(from: rangeInTotalText)))
-
-        // Make the text of the selected area orange by specifying a new attribute.
-        let currentAttributes = instructionCell.instructionLabel.attributedText?.attributes(at: rangeInTotalText.location, effectiveRange: nil)
-        let fontAttribute: AnyObject? = currentAttributes?[NSAttributedString.Key.font] as AnyObject?
-
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.orange, range: NSMakeRange(0, attributedString.length))
-
-        // Make sure that the text will keep the original font by setting it as an attribute.
-        attributedString.addAttribute(NSAttributedString.Key.font, value: fontAttribute!, range: NSMakeRange(0, attributedString.string.utf16.count))
-
-        instructionCell.instructionLabel.text?.replacingCharacters(in: rangeInTotalText, with: attributedString)
-        // Select the specified range in the textfield.
-       /* tvEditor.selectedRange = rangeInTotalText
-
-        // Store temporarily the current font attribute of the selected text.
-        let currentAttributes = tvEditor.attributedText.attributes(at: rangeInTotalText.location, effectiveRange: nil)
-        let fontAttribute: AnyObject? = currentAttributes[NSAttributedString.Key.font] as AnyObject?
-
-        // Assign the selected text to a mutable attributed string.
-        let attributedString = NSMutableAttributedString(string: tvEditor.attributedText.attributedSubstring(from: rangeInTotalText).string)
-
-        // Make the text of the selected area orange by specifying a new attribute.
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.orange, range: NSMakeRange(0, attributedString.length))
-
-        // Make sure that the text will keep the original font by setting it as an attribute.
-        attributedString.addAttribute(NSAttributedString.Key.font, value: fontAttribute!, range: NSMakeRange(0, attributedString.string.utf16.count))*/
-
-        // In case the selected word is not visible scroll a bit to fix this.
-       // tvEditor.scrollRangeToVisible(rangeInTotalText)
-
-        // Begin editing the text storage.
-       // tvEditor.textStorage.beginEditing()
-
-        // Replace the selected text with the new one having the orange color attribute.
-        tvEditor.textStorage.replaceCharacters(in: rangeInTotalText, with: attributedString)
-
-
-        let instructionText = "\(instructionList[indexPath.row].step)"
-        let arrayOfWords = instructionText.components(separatedBy: " ")
-
-        var currentLocation = 0
-        var currentLength = 0
-        var arrayOfRanges = [NSRange]()
-
-        for word in arrayOfWords {
-            currentLength = word.count
-            arrayOfRanges.append(NSRange(location: currentLocation, length: currentLength))
-
-            //                currentLocation += currentLength + 1
-        }
-        let attributedString = NSMutableAttributedString(string: "\(instructionList[indexPath.row].step)")
-        attributedString.addAttribute(.backgroundColor, value: UIColor.yellow, range: NSRange(location: arrayOfRanges[indexPath.row].location, length: arrayOfRanges[indexPath.row].length))
-        instructionCell.instructionLabel.attributedText = attributedString
-
-
-    }*/
+    func forTrailingZero(temp: Double) -> String {
+        let tempVar = String(format: "%g", temp)
+        return tempVar
+    }
 }
 
 extension RecipeDetailViewController: UITableViewDataSource {
@@ -217,7 +157,7 @@ extension RecipeDetailViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             let ingredientCell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
             ingredientCell.textLabel?.text = ingredientList[indexPath.row].name.capitalized
-            ingredientCell.detailTextLabel?.text = "\(ingredientList[indexPath.row].value) " + ingredientList[indexPath.row].unit
+            ingredientCell.detailTextLabel?.text = "\(forTrailingZero(temp: ingredientList[indexPath.row].value)) " + ingredientList[indexPath.row].unit
             return ingredientCell
         } else {
             guard
@@ -226,6 +166,17 @@ extension RecipeDetailViewController: UITableViewDataSource {
             instructionCell.instructionLabel.text = instructionList[indexPath.row].step
             return instructionCell
         }
+    }
+
+}
+
+extension RecipeDetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = .darkGray
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+        header.textLabel?.frame = header.frame
+        header.textLabel?.textAlignment = .center
     }
 
 }
