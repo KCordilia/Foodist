@@ -244,6 +244,5 @@ extension SpeechViewController: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         recordAndRecognizeSpeech()
         playAndPauseButton.setImage(UIImage(named: "Play"), for: .normal)
-
     }
 }

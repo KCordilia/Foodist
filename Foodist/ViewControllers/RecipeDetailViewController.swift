@@ -23,6 +23,7 @@ class RecipeDetailViewController: UIViewController {
     let recipeImageEndpoint = "https://spoonacular.com/recipeImages/"
     weak var speakDelegate: Speakable?
     var spokenTextLengths: Int = 0
+    var previousRange: NSRange = NSMakeRange(0, 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,12 +118,15 @@ class RecipeDetailViewController: UIViewController {
     }
 
     func highlightText(range: NSRange, indexPath: IndexPath) {
+        var unionRange = NSRange()
+        unionRange = NSUnionRange(range, previousRange)
         guard let cell = tableView.cellForRow(at: indexPath) as?
             InstructionCell else { return }
         let text = instructionList[indexPath.row].step
         let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttributes([NSAttributedString.Key.backgroundColor: UIColor.yellow], range: range)
+        attributedString.addAttributes([NSAttributedString.Key.backgroundColor: UIColor.yellow], range: unionRange)
         cell.instructionLabel.attributedText = attributedString
+        previousRange = NSUnionRange(previousRange, range)
     }
 
     func forTrailingZero(temp: Double) -> String {
