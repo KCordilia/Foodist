@@ -265,9 +265,6 @@ extension SpeechViewController: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         recordAndRecognizeSpeech()
         playAndPauseButton.setImage(UIImage(named: "Play"), for: .normal)
-<<<<<<< HEAD
-=======
         siriWaveForm.isHidden = false
->>>>>>> e864a61fb59e874cf7b8e499afb62ab0ab7b13ea
     }
 }
