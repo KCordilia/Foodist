@@ -8,9 +8,11 @@
 
 import UIKit
 
+let reloadPageNotification: Notification.Name = Notification.Name(rawValue: "reloadPage")
+
 class PageViewController: UIPageViewController {
 
-    var favouritecategory = "dessert"
+    var favouriteCategory = "dessert"
     var endPoint = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type="
     let numberOfPages = 5
     var recipeList: RecipeList?
@@ -22,9 +24,13 @@ class PageViewController: UIPageViewController {
         super.viewDidLoad()
         dataSource = self
         delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadPage), name: reloadPageNotification, object: nil)
+        setUpPageControl()
+        loadUrl()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    @objc func reloadPage() {
+        print("notification called")
         loadUrl()
     }
 
@@ -53,17 +59,29 @@ class PageViewController: UIPageViewController {
                            completion: nil)
     }
 
-    func loadUrl() {
-        if let parent = self.parent as? BaseViewController {
-            let typePreference = parent.preferences.filter { $0.apiCategory == "type" }
-            if let randomOption = typePreference.first?.options.randomElement() {
-                favouritecategory = randomOption.apiName
-                print(randomOption.apiName)
-                parent.pageViewPreference = favouritecategory
+    func formUrl() {
+
+        func fetchPreference () {
+            if let savedPreference = UserDefaults.standard.object(forKey: "UserPreference") as? Data {
+                let decoder = JSONDecoder()
+                do {
+                    let savedPreference = try decoder.decode([Preference].self, from: savedPreference)
+                    let typePreference = savedPreference.filter { $0.apiCategory == "type" }
+                    if typePreference.count > 0 {
+                        favouriteCategory = typePreference.first?.options.first?.apiName ?? "dessert"
+                    }
+
+                } catch let error {
+                    print("error in decoding preference ", error)
+                    return
+                }
             }
         }
-        endPoint += favouritecategory + "&number=\(numberOfPages)"
+        endPoint += favouriteCategory + "&number=\(numberOfPages)"
+    }
 
+    @objc func loadUrl() {
+        formUrl()
         let networkHandler = NetworkHandler()
         networkHandler.getAPIData(endPoint) { (result: Result<RecipeList, NetworkError>) in
             if case .failure(let error) = result {

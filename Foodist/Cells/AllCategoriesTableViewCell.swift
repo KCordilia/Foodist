@@ -12,6 +12,4 @@ import UIKit
 
         @IBOutlet weak var categoryName: UILabel!
         @IBOutlet weak var collectionView: UICollectionView!
-
-    }
-
+}
