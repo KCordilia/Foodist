@@ -225,6 +225,16 @@
                                             <action selector="enableVoiceControl:" destination="cXJ-kC-JQA" eventType="touchUpInside" id="43L-5D-exc"/>
                                         </connections>
                                     </button>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CSF-nt-F7T" customClass="SwiftSiriWaveformView" customModule="SwiftSiriWaveformView">
+                                        <rect key="frame" x="319" y="0.0" width="0.0" height="40"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <viewLayoutGuide key="safeArea" id="zcD-40-4nE"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="waveColor">
+                                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0sW-42-dBp"/>
@@ -239,10 +249,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QX6-Lm-Eiz"/>
                     </view>
+                    <size key="freeformSize" width="375" height="50"/>
                     <connections>
                         <outlet property="nextButton" destination="3ty-mk-JhI" id="xGb-KX-SZ3"/>
                         <outlet property="playAndPauseButton" destination="sHj-Bp-Xdr" id="LKe-ag-mw6"/>
                         <outlet property="previousButton" destination="WXQ-hm-mEv" id="4ei-tF-paq"/>
+                        <outlet property="siriWaveForm" destination="CSF-nt-F7T" id="yYe-w4-kj8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWU-Yt-L9i" userLabel="First Responder" sceneMemberID="firstResponder"/>

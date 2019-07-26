@@ -7,5 +7,6 @@ target 'Foodist' do
 
   # Pods for Foodist
 pod 'Kingfisher'
+pod 'SwiftSiriWaveformView'
 
 end

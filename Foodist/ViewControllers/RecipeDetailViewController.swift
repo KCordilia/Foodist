@@ -27,6 +27,7 @@ class RecipeDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = recipe?.title
         guard
             let recipe = recipe
             else { return }
@@ -176,11 +177,14 @@ extension RecipeDetailViewController: UITableViewDataSource {
 
 extension RecipeDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let header = view as? UITableViewHeaderFooterView else { return }
-        header.textLabel?.textColor = .darkGray
+        guard
+            let header = view as? UITableViewHeaderFooterView
+            else { return }
+        header.textLabel?.textColor = .white
         header.textLabel?.font = UIFont.boldSystemFont(ofSize: 22)
         header.textLabel?.frame = header.frame
         header.textLabel?.textAlignment = .center
+        header.backgroundView?.backgroundColor = .gray
     }
 
 }
