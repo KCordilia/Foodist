@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import Speech
+import SwiftSiriWaveformView
 
 protocol Speakable: class {
     func setUpTextToSpeak(_ text: String)
@@ -24,6 +25,7 @@ class SpeechViewController: UIViewController {
     @IBOutlet weak var playAndPauseButton: UIButton!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet var siriWaveForm: SwiftSiriWaveformView!
     let speechSynthesizer = AVSpeechSynthesizer()
     var speechUtterance: AVSpeechUtterance?
     var recipeInstructions: [String] = []
@@ -36,12 +38,19 @@ class SpeechViewController: UIViewController {
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
+    var timer: Timer?
+    var change: CGFloat = 0.01
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
         playAndPauseButton.isEnabled = false
         speechSynthesizer.delegate = self
+        siriWaveForm.isHidden = true
+
+        self.siriWaveForm.density = 1.0
+
+        timer = Timer.scheduledTimer(timeInterval: 0.009, target: self, selector: #selector(SpeechViewController.refreshAudioView(_:)), userInfo: nil, repeats: true)
     }
 
     @IBAction func previous(_ sender: Any) {
@@ -117,6 +126,7 @@ class SpeechViewController: UIViewController {
             disableAVSession()
             setAvailabiltyForControls()
         }
+        stopRecognition()
     }
 
     func initialSetup() {
@@ -173,6 +183,7 @@ class SpeechViewController: UIViewController {
     }
 
     func recordAndRecognizeSpeech() {
+        siriWaveForm.isHidden = false
         let node = audioEngine.inputNode
         let recordingFormat = node.outputFormat(forBus: 0)
         node.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { buffer, _ in
@@ -225,6 +236,16 @@ class SpeechViewController: UIViewController {
         request.endAudio()
         recognitionTask?.cancel()
         audioEngine.inputNode.removeTap(onBus: 0)
+        siriWaveForm.isHidden = true
+    }
+
+    @objc internal func refreshAudioView(_:Timer) {
+        if self.siriWaveForm.amplitude <= self.siriWaveForm.idleAmplitude || self.siriWaveForm.amplitude > 1.0 {
+            self.change *= -1.0
+        }
+
+        // Simply set the amplitude to whatever you need and the view will update itself.
+        self.siriWaveForm.amplitude += self.change
     }
 }
 
@@ -244,6 +265,6 @@ extension SpeechViewController: AVSpeechSynthesizerDelegate {
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
         recordAndRecognizeSpeech()
         playAndPauseButton.setImage(UIImage(named: "Play"), for: .normal)
-
+        siriWaveForm.isHidden = false
     }
 }
