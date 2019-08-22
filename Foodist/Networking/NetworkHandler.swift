@@ -15,7 +15,7 @@ enum NetworkError: Error {
 struct NetworkHandler {
 
     func getAPIData<T: Codable>(_ url: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
-        let APIKey = "6d4b0c4e3bmsh16b8d0615ae873bp1510ccjsnc4cc6ac1e186"
+        let APIKey = "548dcfd5b3msha4dd0fe2766d521p19675djsne07dbbe555fe"
         let hostHeader = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
         let session = URLSession.shared
         guard
@@ -27,7 +27,6 @@ struct NetworkHandler {
         let task = session.dataTask(with: request) { (data, _, error) in
             if error == nil {
                 if let data = data {
-
                     let result: Result<T, Error> = self.decode(data: data)
 
                     switch result {

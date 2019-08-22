@@ -156,55 +156,6 @@ class AllCatagoriesViewController: UIViewController {
         }
     }
 
-   /* func loadUrls() {
-
-            fetchPreference()
-
-            let otherCatagories = allPreferences.map { (element) -> [PreferenceOption] in
-                return element.options
-            }
-            var concatinated = Array(otherCatagories.joined())
-            if concatinated.count > 0 {
-                concatinated.removeFirst()
-            }
-            for index in 0..<concatinated.count {
-            let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?type=\(concatinated[index].apiName)"
-            var recipeList: RecipeList?
-            let networkHandler = NetworkHandler()
-            dispatchGroup.enter()
-            networkHandler.getAPIData(urlString) { (result: Result<RecipeList, NetworkError>) in
-
-                switch result {
-                case .failure(let error):
-                    switch error {
-                    case .networkError(let message):
-                        DispatchQueue.main.async {
-                            print("before leave in network error index : ", index)
-                            self.dispatchGroup.leave()
-                            self.showAlert(message)
-                        }
-                    }
-                case .success(let value):
-                    recipeList = value
-                    print("appending category")
-                    if let recipeList = recipeList {
-                        let category = Category(name: concatinated[index].displayTitle, recipes: recipeList.results, isUserPreference: true)
-                        self.catagories.append(category)
-                    }
-                    print("before leave in success index : ", index)
-                    self.dispatchGroup.leave()
-                }
-            }
-        }
-            dispatchGroup.notify(queue: dispatchQueue) {
-                print("notified")
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-        }
-    }
-}*/
-
     func showAlert(_ message: String) {
         let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
