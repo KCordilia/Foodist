@@ -15,7 +15,7 @@ class PreferenceTableViewController: UITableViewController {
     let rowHeight: CGFloat = 45
     let cellIdentifier = "rowCell"
     let headerIdentifier = "preferenceHeaderView"
-    var preferences: [Preference] = []
+    var availablePreferences: [Preference] = []
     var needToExpand: [Bool] = [true, true, true, true]
     var userPreferences: [Preference] = []
     var saveButton = UIBarButtonItem()
@@ -24,6 +24,7 @@ class PreferenceTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Preferences"
         setUpModel()
+        fetchPreference()
         setUpTable()
         setUpBarButton()
     }
@@ -41,7 +42,7 @@ class PreferenceTableViewController: UITableViewController {
     }
 
     func setUpModel() {
-        preferences = Preference.getAllPreferenceOptions()
+        availablePreferences = Preference.getAllPreferenceOptions()
     }
 
     func setUpTable() {
@@ -69,12 +70,29 @@ class PreferenceTableViewController: UITableViewController {
     func addPreference(preference: Preference, option: PreferenceOption) {
 
         var isPresent = false
+        /*if (userPreferences.contains( where: { $0.apiCategory == preference.apiCategory })) {
+            print("this item is already present")
+            var existingPreference = userPreferences.remove(at: index)
+            //existingPreference = Preference(category: removed.category, displayTitle: removed.displayTitle, options: removed.options)
+            if existingPreference.options.contains(option) {
+                userPreferences.append(existingPreference)
+            } else {
+                existingPreference.options.append(option)
+                userPreferences.append(existingPreference)
+            }
+            isPresent = true
+            //break
+        }*/
         for index in 0..<userPreferences.count {
             if userPreferences[index].apiCategory == preference.apiCategory {
                var existingPreference = userPreferences.remove(at: index)
                 //existingPreference = Preference(category: removed.category, displayTitle: removed.displayTitle, options: removed.options)
-                existingPreference.options.append(option)
-                userPreferences.append(existingPreference)
+                if existingPreference.options.contains(option) {
+                    userPreferences.append(existingPreference)
+                } else {
+                    existingPreference.options.append(option)
+                    userPreferences.append(existingPreference)
+                }
                 isPresent = true
                 break
             }
@@ -101,7 +119,8 @@ class PreferenceTableViewController: UITableViewController {
             let decoder = JSONDecoder()
             do {
                 let savedPreference = try decoder.decode([Preference].self, from: savedPreference)
-                preferences = savedPreference
+                print(savedPreference)
+                userPreferences = savedPreference
             } catch let error {
                 print(error)
             }
@@ -129,14 +148,14 @@ class PreferenceTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return preferences.count
+        return availablePreferences.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if needToExpand[section] {
             return 0
         } else {
-            return preferences[section].options.count
+            return availablePreferences[section].options.count
         }
 
     }
@@ -144,7 +163,7 @@ class PreferenceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerIdentifier) as? PreferenceHeaderView else { preconditionFailure("header view is not available") }
-        headerView.categoryLabel.text = preferences[section].displayTitle
+        headerView.categoryLabel.text = availablePreferences[section].displayTitle
         headerView.button.tag = section
         headerView.button.addTarget(self, action: #selector(sectionTapped(sender:)), for: .touchUpInside)
         if needToExpand[section] {
@@ -169,14 +188,35 @@ class PreferenceTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OptionsTableViewCell else {
             preconditionFailure("section cell not available")
         }
-        cell.optionLabel.text = preferences[indexPath.section].options[indexPath.row].displayTitle
+        let preference = availablePreferences[indexPath.section]
+        cell.optionLabel.text = preference.options[indexPath.row].displayTitle
+        if userPreferences.contains(where: { $0.apiCategory == preference.apiCategory }) {
+            for i in 0..<userPreferences.count {
+                if userPreferences[i].options.contains(preference.options[indexPath.row]) {
+                    print("match found ",preference.options[indexPath.row])
+                    cell.accessoryType = .checkmark
+                    break
+                }
+                else {
+                    cell.accessoryType = .none
+                    //break
+                }
+            }
+        }
+        /*let alreadyPreferedOption = userPreferences.filter { $0 == preference }
+        if !alreadyPreferedOption.isEmpty {
+            print("match found")
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }*/
         cell.selectionStyle = .none
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
-        let preference = preferences[indexPath.section]
+        let preference = availablePreferences[indexPath.section]
         let selectedOption = preference.options[indexPath.row]
         if cell?.accessoryType == UITableViewCell.AccessoryType.none {
             addPreference(preference: preference, option: selectedOption)
@@ -185,7 +225,7 @@ class PreferenceTableViewController: UITableViewController {
             removePreference(preference: preference, option: selectedOption)
             cell?.accessoryType = .none
         }
-        saveButton.isEnabled = userPreferences.count > 0
+        saveButton.isEnabled = true
         print("***************/n/n", userPreferences, "*****************/n/n")
 
     }

@@ -142,7 +142,6 @@ class AllCatagoriesViewController: UIViewController {
             let decoder = JSONDecoder()
             do {
                 let savedPreference = try decoder.decode([Preference].self, from: savedPreference)
-               // allPreferences = savedPreference
                 formUrl(with: savedPreference)
                 print(savedPreference)
             } catch let error {
@@ -152,7 +151,7 @@ class AllCatagoriesViewController: UIViewController {
         } else {
             let mainCourse = PreferenceOption(apiName: "main+course", displayTitle: "Main course")
             let defaultPreference = Preference(apiCategory: "type", displayTitle: "Food Type", options: [mainCourse])
-            allPreferences?.append(defaultPreference)
+            formUrl(with: [defaultPreference])
         }
     }
 

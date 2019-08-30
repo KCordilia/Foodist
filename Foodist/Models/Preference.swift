@@ -52,7 +52,7 @@ struct Preference: Codable {
     }
 
 }
-struct PreferenceOption: Codable {
+struct PreferenceOption: Codable,Equatable {
     let apiName: String
     let displayTitle: String
 }
